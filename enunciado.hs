@@ -1,3 +1,4 @@
+{-
 Telco
 
 Es una compañia que se dedica a comunicar las ciudades que se susbcriben a su servicio.
@@ -7,6 +8,8 @@ Finalmente establece canales que conectan distintas ciudades ocupando una unidad
 capacidad por cada enlace recorrido.
 
 Para sostener este modelo se cuenta con las siguientes entidades:
+
+-}
 
 module Point ( Point, newP, difP)
    where
