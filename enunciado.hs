@@ -19,7 +19,7 @@ data Point = Poi Int Int deriving (Eq, Show)
 newP :: Int -> Int -> Point
 difP :: Point -> Point -> Float  -- distancia absoluta
 -----------------
-module City ( City, newC, nameC, distanceC )
+{-module City ( City, newC, nameC, distanceC )
    where
 
 data City = Cit String Point deriving (Eq, Show)
@@ -70,5 +70,5 @@ connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades est
 linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas
 delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
 availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades
-
+-}
 

@@ -1,0 +1,20 @@
+Point
+difP -> calcular distancia entre vectores
+
+City
+pattern matching para extraer name y punto
+
+Quality
+
+Region
+linkR chequear q ciudades esten en lista de cities
+
+
+availablecapacityR agarra dos ciudades, se fija si estan linkeadas
+
+
+
+Preguntas_
+por que constructor
+podemos crear/borrar funciones?
+
