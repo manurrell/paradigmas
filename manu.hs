@@ -4,25 +4,23 @@ data Quality = Qua String Int Float deriving (Eq, Show)
 
 sqr x = x*x
 newP :: Int -> Int -> Point
-newP a b=Poi a b
+newP x y=Poi x y
 distP :: Point -> Point -> Float
 distP (Poi x1 y1) (Poi x2 y2) = sqrt(sqr(fromIntegral(x1-x2))+sqr(fromIntegral(y1-y2)))
 
 newC :: String -> Point -> City
 nameC :: City -> String
 distanceC :: City -> City -> Float
-newC a b=  Cit a b
-nameC (Cit a b)= a
-distanceC (Cit a b) (Cit c d)= distP b d
+newC name location=  Cit name location
+nameC (Cit name location)= name
+distanceC (Cit name location) (Cit name2 location2)= distP location location2
 
 newQ :: String -> Int -> Float -> Quality
 capacityQ :: Quality -> Int
 delayQ :: Quality -> Float 
-newQ a b c= Qua a b c
-capacityQ (Qua a b c)= b
-delayQ (Qua a b c)= c
-
-
+newQ tipo cap delay= Qua tipo cap delay
+capacityQ (Qua tipo cap delay)= cap
+delayQ (Qua tipo cap delay)= delay
 
 a= newP 0 0
 b= newP 1 1
