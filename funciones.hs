@@ -35,3 +35,4 @@ b= newP 1 1
 lara= newC "neuquen" a
 manu= newC "miau" b 
 hQ= newQ "alta calidad" 10 0.2
+linkLM= newL lara manu hQ
