@@ -29,6 +29,10 @@ connectsL :: City -> Link -> Bool
 connectsL c (Lin c1 c2 q) | c==c1 = True | c==c2 = True | otherwise = False
 linksL :: City -> City -> Link -> Bool
 linksL c1 c2 (Lin c3 c4 q) | c1 == c2 = False | ((c1==c3) || (c1==c4)) && ((c2==c3) || (c2==c4)) = True
+capacityL :: Link -> Int   
+capacityL(Lin ciudad1 ciudad2 calidad)=capacityQ calidad
+delayL :: Link -> Float
+delayL(Lin ciudad1 ciudad2 calidad)= delayQ calidad
 
 a= newP 0 0
 b= newP 1 1
