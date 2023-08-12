@@ -4,7 +4,7 @@ sqr x = x*x
 newP :: Int -> Int -> Point
 newP a b=Poi a b
 distP :: Point -> Point -> Float
-distP (Poi x1 y1) (Poi x2 y2) = sqrt(sqr(fromIntegral(x1-x2)+sqr(fromIntegral(y1-y2))))
+distP (Poi x1 y1) (Poi x2 y2) = sqrt(sqr(fromIntegral(x1-x2))+sqr(fromIntegral(y1-y2)))
 newC :: String -> Point -> City
 nameC :: City -> String
 distanceC :: City -> City -> Float
