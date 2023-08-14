@@ -3,6 +3,7 @@ data City = Cit String Point deriving (Eq, Show)
 data Quality = Qua String Int Float deriving (Eq, Show)
 data Link = Lin City City Quality deriving (Eq, Show)
 data Region = Reg [City] [Link] [Tunel]
+data Tunel = Tun [Link] deriving (Eq, Show)
 
 sqr x = x*x
 newP :: Int -> Int -> Point
@@ -47,7 +48,9 @@ delayT :: Tunel -> Float -- la demora que sufre una conexion en este tunel
 delayT (Tun links) =  sum(map delayL links)
 
 -- newR :: Region
+-- newR= Reg [] [] []
 -- foundR :: Region -> City -> Region -- agrega una nueva ciudad a la región
+-- foundR (Reg ciudades links tuneles)  ciudad = Reg ((:) ciudad ciudades) links tuneles
 -- linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de la región con un enlace de la calidad indicada
 -- tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
 -- connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
