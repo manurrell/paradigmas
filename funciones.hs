@@ -51,7 +51,8 @@ newR :: Region
 newR= Reg [] [] []
 foundR :: Region -> City -> Region -- agrega una nueva ciudad a la región
 foundR (Reg ciudades links tuneles)  ciudad = Reg ((:) ciudad ciudades) links tuneles
--- linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de la región con un enlace de la calidad indicada
+linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de la región con un enlace de la calidad 
+linkR (Reg ciudades links tuneles) ciudad1 ciudad2 calidad=Reg ciudades ((newL ciudad1 ciudad2 calidad):links) tuneles
 -- tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
 -- connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
 -- linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas
