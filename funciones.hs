@@ -34,6 +34,17 @@ capacityL(Lin ciudad1 ciudad2 calidad)=capacityQ calidad
 delayL :: Link -> Float
 delayL(Lin ciudad1 ciudad2 calidad)= delayQ calidad
 
+orA :: [Bool] -> Bool
+orA a= foldr (||) False a
+newT :: [Link] -> Tunel
+newT links= Tun links
+connectsT :: City -> City -> Tunel -> Bool -- inidca si este tunel conceta estas dos ciudades distintas
+connectsT ciudad1 ciudad2 (Tun links) = orA (map (linksL ciudad1 ciudad2) links) 
+usesT :: Link -> Tunel -> Bool  -- indica si este tunel atraviesa ese 
+usesT link (Tun links)= elem link links 
+delayT :: Tunel -> Float -- la demora que sufre una conexion en este tunel
+delayT (Tun links) =  sum(map delayL links)
+
 a= newP 0 0
 b= newP 1 1
 lara= newC "neuquen" a
