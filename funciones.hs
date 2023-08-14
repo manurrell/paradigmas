@@ -47,10 +47,10 @@ usesT link (Tun links)= elem link links
 delayT :: Tunel -> Float -- la demora que sufre una conexion en este tunel
 delayT (Tun links) =  sum(map delayL links)
 
--- newR :: Region
--- newR= Reg [] [] []
--- foundR :: Region -> City -> Region -- agrega una nueva ciudad a la región
--- foundR (Reg ciudades links tuneles)  ciudad = Reg ((:) ciudad ciudades) links tuneles
+newR :: Region
+newR= Reg [] [] []
+foundR :: Region -> City -> Region -- agrega una nueva ciudad a la región
+foundR (Reg ciudades links tuneles)  ciudad = Reg ((:) ciudad ciudades) links tuneles
 -- linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de la región con un enlace de la calidad indicada
 -- tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
 -- connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
