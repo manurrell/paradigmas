@@ -21,7 +21,13 @@ podemos cambiar el formato de los data types? (para poder usar tuplas first y se
 tema registro de datos  --> solo interesa lista de ciudades de la region
 
 
-PODEMOS ASUMIR PARA  HACER EL CONNECTST QUE EN ORDEN LOS LINKS son ingersadosº
 
 
 to do:
+_funciones connectsT (PODEMOS ASUMIR PARA  HACER EL CONNECTST QUE EN ORDEN LOS LINKS son ingersados)
+            las de region
+_guardas
+_ver como importar los modulos
+_escenarios     _ regiones no son actualizables
+                _ guardas error
+                _ lista errores
