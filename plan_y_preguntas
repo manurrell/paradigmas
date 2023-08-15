@@ -16,7 +16,6 @@ availablecapacityR agarra dos ciudades, se fija si estan linkeadas
 
 Preguntas_
 por que constructor     --> porque es conveniente para hacer modificaciones facilmente
-funciones casi iguales
-podemos crear/borrar funciones?
+podemos crear/borrar funciones? --> no borrar, 
 podemos cambiar el formato de los data types? (para poder usar tuplas first y second)   --> no
 tema registro de datos  --> solo interesa lista de ciudades de la region

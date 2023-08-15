@@ -3,7 +3,7 @@ data City = Cit String Point deriving (Eq, Show)
 data Quality = Qua String Int Float deriving (Eq, Show)
 data Link = Lin City City Quality deriving (Eq, Show)
 data Region = Reg [City] [Link] [Tunel] deriving (Show)
-data Tunel = Tun [Link] deriving (Eq, Show)
+
 
 sqr x = x*x
 newP :: Int -> Int -> Point
@@ -36,6 +36,8 @@ capacityL(Lin ciudad1 ciudad2 calidad)=capacityQ calidad
 delayL :: Link -> Float
 delayL(Lin ciudad1 ciudad2 calidad)= delayQ calidad
 
+
+data Tunel = Tun [Link] deriving (Eq, Show)
 orA :: [Bool] -> Bool
 orA a= foldr (||) False a
 newT :: [Link] -> Tunel
