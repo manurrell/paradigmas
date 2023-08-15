@@ -41,7 +41,7 @@ orA a= foldr (||) False a
 newT :: [Link] -> Tunel
 newT links= Tun links
 connectsT :: City -> City -> Tunel -> Bool -- inidca si este tunel conceta estas dos ciudades distintas
-connectsT ciudad1 ciudad2 (Tun links) = orA (map (linksL ciudad1 ciudad2) links) 
+connectsT ciudad1 ciudad2 (Tun links) = if (orA (map (connectsL ciudad1) links)) && (orA (map (connectsL ciudad2) links)) then True else False
 usesT :: Link -> Tunel -> Bool  -- indica si este tunel atraviesa ese 
 usesT link (Tun links)= elem link links 
 delayT :: Tunel -> Float -- la demora que sufre una conexion en este tunel
