@@ -59,6 +59,8 @@ linkedR (Reg ciudades links tuneles) ciudad1 ciudad2=orA(map (linksL ciudad1 ciu
 -- delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
 -- availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades
 
+-------------------------------------------------
+
 a= newP 0 0
 b= newP 1 1
 c= newP 2 2
