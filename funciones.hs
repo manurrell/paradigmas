@@ -29,7 +29,8 @@ connectsL c (Lin c1 c2 q) | c==c1 = True
                                         | c==c2 = True
                                         | otherwise = False
 linksL :: City -> City -> Link -> Bool                          --chequear si dos ciudades estan linkeadas por 1 link
-linksL c1 c2 (Lin c3 c4 q) | c1 == c2 = False | ((c1==c3) || (c1==c4)) && ((c2==c3) || (c2==c4)) = True
+linksL c1 c2 (Lin c3 c4 q) | c1 == c2 = False 
+                                        | ((c1==c3) || (c1==c4)) && ((c2==c3) || (c2==c4)) = True
 capacityL :: Link -> Int   
 capacityL(Lin ciudad1 ciudad2 calidad)=capacityQ calidad        --obtener int capacidad de la calidad asignada al link
 delayL :: Link -> Float
