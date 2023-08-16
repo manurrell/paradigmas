@@ -11,7 +11,7 @@ nameC :: City -> String
 distC :: City -> City -> Float
 newC name location=  Cit name location
 nameC (Cit name location)= name
-distanceC (Cit name1 location1) (Cit name2 location2)= distP location1 location2
+distC (Cit name1 location1) (Cit name2 location2)= distP location1 location2
 
 data Quality = Qua String Int Float deriving (Eq, Show) ----------------------------------------------------
 newQ :: String -> Int -> Float -> Quality
@@ -25,7 +25,9 @@ data Link = Lin City City Quality deriving (Eq, Show) --------------------------
 newL :: City -> City -> Quality -> Link
 newL ciudad1 ciudad2 calidad= Lin ciudad1 ciudad2 calidad
 connectsL :: City -> Link -> Bool                               --chequear si una ciudad forma parte de un link
-connectsL c (Lin c1 c2 q) | c==c1 = True | c==c2 = True | otherwise = False
+connectsL c (Lin c1 c2 q) | c==c1 = True
+                                        | c==c2 = True
+                                        | otherwise = False
 linksL :: City -> City -> Link -> Bool                          --chequear si dos ciudades estan linkeadas por 1 link
 linksL c1 c2 (Lin c3 c4 q) | c1 == c2 = False | ((c1==c3) || (c1==c4)) && ((c2==c3) || (c2==c4)) = True
 capacityL :: Link -> Int   
@@ -36,9 +38,16 @@ delayL(Lin ciudad1 ciudad2 calidad)= delayQ calidad             --obtener float 
 data Tunel = Tun [Link] deriving (Eq, Show) ---------------------------------------------------
 orA :: [Bool] -> Bool
 orA a= foldr (||) False a
+verifyLinkEntry :: City -> Link -> Bool
+verifyLinkEntry ciudad (Lin ciudad1 ciudad2 q) | ciudad1==ciudad = True
+                                                                           | otherwise = False 
+verifyLinkExit :: City -> Link -> Bool
+verifyLinkExit ciudad (Lin ciudad1 ciudad2 q) | ciudad2==ciudad = True | otherwise = False 
 newT :: [Link] -> Tunel
 newT links= Tun links
 connectsT :: City -> City -> Tunel -> Bool -- inidca si este tunel conceta estas dos ciudades distintas
+connectsT ciudad1 ciudad2 (Tun links) | (verifyLinkEntry ciudad1 (head links) && verifyLinkExit ciudad2 (last links)) || (verifyLinkEntry ciudad2 (head links) && verifyLinkExit ciudad1 (last links)) = True
+                                                            | otherwise = False
 --connectsT ciudad1 ciudad2 (Tun links) = if (orA (map (connectsL ciudad1) links)) && (orA (map (connectsL ciudad2) links)) then True else False
 usesT :: Link -> Tunel -> Bool  -- indica si este tunel atraviesa ese 
 usesT link (Tun links)= elem link links 
@@ -61,15 +70,18 @@ linkedR (Reg ciudades links tuneles) ciudad1 ciudad2=orA(map (linksL ciudad1 ciu
 
 -------------------------------------------------
 
-a= newP 0 0
-b= newP 1 1
-c= newP 2 2
-lara= newC "neuquen" a
-manu= newC "miau" b
-esteban= newC "raul" c
+aa= newP 0 0
+bb= newP 1 1
+cc= newP 2 2
+lara= newC "neuquen" aa
+manu= newC "miau" bb
+esteban= newC "raul" cc
 hQ= newQ "alta calidad" 10 0.2
 linkLM= newL lara manu hQ
+linkME= newL manu esteban hQ
+tunelLM= newT [linkLM]
+tunelLME= newT  [linkLM,linkME]
 a=newR
 b= foundR a manu
-a= foundR b lara
-b=linkR a lara manu
+c= foundR b lara
+d=linkR c lara manu
