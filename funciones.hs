@@ -47,22 +47,27 @@ delayT (Tun links) =  sum(map delayL links)
 
 
 data Region = Reg [City] [Link] [Tunel] deriving (Show) ---------------------------------------------------
-newR :: Region
 newR= Reg [] [] []
 foundR :: Region -> City -> Region -- agrega una nueva ciudad a la región
 foundR (Reg ciudades links tuneles)  ciudad = Reg ( ciudad : ciudades) links tuneles
 linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de la región con un enlace de la calidad 
 linkR (Reg ciudades links tuneles) ciudad1 ciudad2 calidad=Reg ciudades ((newL ciudad1 ciudad2 calidad):links) tuneles
-tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
+-- tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
 -- connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
--- linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas
+linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas
+linkedR (Reg ciudades links tuneles) ciudad1 ciudad2=orA(map (linksL ciudad1 ciudad2) links)
 -- delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
 -- availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades
 
----------------------------------
 a= newP 0 0
 b= newP 1 1
+c= newP 2 2
 lara= newC "neuquen" a
-manu= newC "miau" b 
+manu= newC "miau" b
+esteban= newC "raul" c
 hQ= newQ "alta calidad" 10 0.2
 linkLM= newL lara manu hQ
+a=newR
+b= foundR a manu
+a= foundR b lara
+b=linkR a lara manu
