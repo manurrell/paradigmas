@@ -38,7 +38,7 @@ orA :: [Bool] -> Bool
 orA a= foldr (||) False a
 newT :: [Link] -> Tunel
 newT links= Tun links
---connectsT :: City -> City -> Tunel -> Bool -- inidca si este tunel conceta estas dos ciudades distintas
+connectsT :: City -> City -> Tunel -> Bool -- inidca si este tunel conceta estas dos ciudades distintas
 --connectsT ciudad1 ciudad2 (Tun links) = if (orA (map (connectsL ciudad1) links)) && (orA (map (connectsL ciudad2) links)) then True else False
 usesT :: Link -> Tunel -> Bool  -- indica si este tunel atraviesa ese 
 usesT link (Tun links)= elem link links 
@@ -54,7 +54,7 @@ linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de l
 linkR (Reg ciudades links tuneles) ciudad1 ciudad2 calidad=Reg ciudades ((newL ciudad1 ciudad2 calidad):links) tuneles
 -- tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
 -- connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
-linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas
+linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas directamente
 linkedR (Reg ciudades links tuneles) ciudad1 ciudad2=orA(map (linksL ciudad1 ciudad2) links)
 -- delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
 -- availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades
