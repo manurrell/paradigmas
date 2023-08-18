@@ -34,7 +34,7 @@ linksL c1 c2 (Lin c3 c4 q) | c1 == c2 = False
 capacityL :: Link -> Int   
 capacityL(Lin ciudad1 ciudad2 calidad)=capacityQ calidad        --obtener int capacidad de la calidad asignada al link
 delayL :: Link -> Float
-delayL(Lin ciudad1 ciudad2 calidad)= delayL(Lin ciudad1 ciudad2 calidad)= (delayQ calidad)*(distC ciudad1 ciudad2)            --obtener float delay de la calidad asignada al link
+delayL(Lin ciudad1 ciudad2 calidad)= (delayQ calidad)*(distC ciudad1 ciudad2)            --obtener float delay de la calidad asignada al link
 
 data Tunel = Tun [Link] deriving (Eq, Show) ---------------------------------------------------
 orA :: [Bool] -> Bool
@@ -56,7 +56,7 @@ delayT :: Tunel -> Float -- la demora que sufre una conexion en este tunel
 delayT (Tun links) =  sum(map delayL links)
 
 
-data Region = Reg [City] [Link] [Tunel] deriving (Show) ---------------------------------------------------
+data Region = Reg [City] [Link] [Tunel] deriving (Eq,Show) ---------------------------------------------------
 newR= Reg [] [] []
 foundR :: Region -> City -> Region -- agrega una nueva ciudad a la región
 foundR (Reg ciudades links tuneles)  ciudad = Reg ( ciudad : ciudades) links tuneles
@@ -85,4 +85,4 @@ tunelLME= newT  [linkLM,linkME]
 a=newR
 b= foundR a manu
 c= foundR b lara
-d=linkR c lara manu
+d=linkR c lara manu hQ
