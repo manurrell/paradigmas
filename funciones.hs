@@ -30,11 +30,12 @@ connectsL c (Lin c1 c2 q) | c==c1 = True
                                         | otherwise = False
 linksL :: City -> City -> Link -> Bool                          --chequear si dos ciudades estan linkeadas por 1 link
 linksL c1 c2 (Lin c3 c4 q) | c1 == c2 = False 
-                                        | ((c1==c3) || (c1==c4)) && ((c2==c3) || (c2==c4)) = True
+                        | ((c1==c3) || (c1==c4)) && ((c2==c3) || (c2==c4)) = True
+                        | otherwise = False
 capacityL :: Link -> Int   
 capacityL(Lin ciudad1 ciudad2 calidad)=capacityQ calidad        --obtener int capacidad de la calidad asignada al link
 delayL :: Link -> Float
-delayL(Lin ciudad1 ciudad2 calidad)= (delayQ calidad)*(distC ciudad1 ciudad2)            --obtener float delay de la calidad asignada al link
+delayL(Lin ciudad1 ciudad2 calidad)= (distC ciudad1 ciudad2)/(delayQ calidad)           --obtener float delay de la calidad asignada al link
 
 data Tunel = Tun [Link] deriving (Eq, Show) ---------------------------------------------------
 orA :: [Bool] -> Bool
@@ -48,8 +49,7 @@ newT :: [Link] -> Tunel
 newT links= Tun links
 connectsT :: City -> City -> Tunel -> Bool -- inidca si este tunel conceta estas dos ciudades distintas
 connectsT ciudad1 ciudad2 (Tun links) | (verifyLinkEntry ciudad1 (head links) && verifyLinkExit ciudad2 (last links)) || (verifyLinkEntry ciudad2 (head links) && verifyLinkExit ciudad1 (last links)) = True
-                                                            | otherwise = False
---connectsT ciudad1 ciudad2 (Tun links) = if (orA (map (connectsL ciudad1) links)) && (orA (map (connectsL ciudad2) links)) then True else False
+                                      | otherwise = False
 usesT :: Link -> Tunel -> Bool  -- indica si este tunel atraviesa ese 
 usesT link (Tun links)= elem link links 
 delayT :: Tunel -> Float -- la demora que sufre una conexion en este tunel
@@ -62,10 +62,18 @@ foundR :: Region -> City -> Region -- agrega una nueva ciudad a la región
 foundR (Reg ciudades links tuneles)  ciudad = Reg ( ciudad : ciudades) links tuneles
 linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de la región con un enlace de la calidad 
 linkR (Reg ciudades links tuneles) ciudad1 ciudad2 calidad=Reg ciudades ((newL ciudad1 ciudad2 calidad):links) tuneles
--- tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
+
+andA :: [Bool] -> Bool
+andA a= foldr (&&) True a
+verifyL :: Region -> [City] -> Bool
+verifyL (Reg c l t) (x1:(x2:xs)) | xs==[] = orA(map(linksL x1 x2) l) | otherwise = andA(orA(map(linksL x1 x2) l):(verifyL (Reg c l t) (x2:xs)):[])
+
+--tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
+--tunelR (Reg c l t) ciudades | verifyL reg ciudades = Reg c l (newT (head ciudades))
 -- connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
-linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas directamente
-linkedR (Reg ciudades links tuneles) ciudad1 ciudad2=orA(map (linksL ciudad1 ciudad2) links)
+--linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas directamente
+--linkedR (Reg ciudades
+--connectsT :s links tuneles) ciudad1 ciudad2=orA(map (linksL ciudad1 ciudad2) links)
 -- delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
 -- availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades
 
@@ -86,4 +94,3 @@ a=newR
 b= foundR a manu
 c= foundR b lara
 d=linkR c lara manu hQ
-e=
