@@ -34,7 +34,7 @@ linksL c1 c2 (Lin c3 c4 q) | c1 == c2 = False
 capacityL :: Link -> Int   
 capacityL(Lin ciudad1 ciudad2 calidad)=capacityQ calidad        --obtener int capacidad de la calidad asignada al link
 delayL :: Link -> Float
-delayL(Lin ciudad1 ciudad2 calidad)= delayQ calidad             --obtener float delay de la calidad asignada al link
+delayL(Lin ciudad1 ciudad2 calidad)= delayL(Lin ciudad1 ciudad2 calidad)= (delayQ calidad)*(distC ciudad1 ciudad2)            --obtener float delay de la calidad asignada al link
 
 data Tunel = Tun [Link] deriving (Eq, Show) ---------------------------------------------------
 orA :: [Bool] -> Bool
