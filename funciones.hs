@@ -65,7 +65,7 @@ linkR (Reg ciudades links tuneles) ciudad1 ciudad2 calidad=Reg ciudades ((newL c
 
 andA :: [Bool] -> Bool
 andA a= foldr (&&) True a
-verifyL :: Region -> [City] -> Bool
+verifyL :: Region -> [City] -> Bool     --chequear que en una region haya links desde una primera ciudad hasta una ultima con todas sus intermediarias
 verifyL (Reg c l t) (x1:(x2:xs)) | xs==[] = orA(map(linksL x1 x2) l) | otherwise = andA(orA(map(linksL x1 x2) l):(verifyL (Reg c l t) (x2:xs)):[])
 
 --tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
