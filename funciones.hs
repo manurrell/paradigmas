@@ -72,7 +72,12 @@ iflinkreturnlink :: City -> City -> Link -> Maybe a
 iflinkreturnlink c1 c2 l | (linksL c1 c2 l) = Just l | otherwise = Nothing
 obtenerlinksordenados :: [Link] -> [City] -> [Link]
 obtenerlinksordenados l (x1:(x2:xs)) |xs==[]= map(iflinkreturnlink x1 x2) l | otherwise = ((map(iflinkreturnlink x1 x2) l):(obtenerlinksordenados l (x2:xs)):[])
-
+verifyC:: Region -> City -> Bool
+verifyC (Reg c l t) ciudad = elem ciudad c
+linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas directamente
+linkedR (Reg ciudades links tuneles) ciudad1 ciudad2 = orA(map (linksL ciudad1 ciudad2) links)
+delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
+delayR region ciudad1 ciudad2 | (verifyC region ciudad1) && (verifyC region ciudad2) = distC ciudad1 ciudad2 | otherwise = error" Las ciudades no pertenecn a esta region"
 --tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
 --tunelR (Reg c l t) ciudades | length ciudades==0 = error"ingrese al menos dos ciudades para construir tunel"
 --                            |verifyL (Reg c l t) ciudades = Reg c l ((newT )
