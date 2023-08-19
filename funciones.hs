@@ -68,14 +68,24 @@ andA a= foldr (&&) True a
 verifyL :: Region -> [City] -> Bool     --chequear que en una region haya links desde una primera ciudad hasta una ultima con todas sus intermediarias
 verifyL (Reg c l t) (x1:(x2:xs)) | xs==[] = orA(map(linksL x1 x2) l) | otherwise = andA(orA(map(linksL x1 x2) l):(verifyL (Reg c l t) (x2:xs)):[])
 
+iflinkreturnlink :: City -> City -> Link -> Maybe a
+iflinkreturnlink c1 c2 l | (linksL c1 c2 l) = Just l | otherwise = Nothing
+obtenerlinksordenados :: [Link] -> [City] -> [Link]
+obtenerlinksordenados l (x1:(x2:xs)) |xs==[]= map(iflinkreturnlink x1 x2) l | otherwise = ((map(iflinkreturnlink x1 x2) l):(obtenerlinksordenados l (x2:xs)):[])
+
 --tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
---tunelR (Reg c l t) ciudades | verifyL reg ciudades = Reg c l (newT (head ciudades))
+--tunelR (Reg c l t) ciudades | length ciudades==0 = error"ingrese al menos dos ciudades para construir tunel"
+--                            |verifyL (Reg c l t) ciudades = Reg c l ((newT )
 -- connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
 --linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas directamente
 --linkedR (Reg ciudades
---connectsT :s links tuneles) ciudad1 ciudad2=orA(map (linksL ciudad1 ciudad2) links)
 -- delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
 -- availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades
+
+
+newLinks :: [City] -> Quality -> [Link]
+newLinks (x1:[]) q= []
+newLinks (x1:(x2:xs)) q= (newL x1 x2 q):(newLinks (x2:xs) q)
 
 -------------------------------------------------
 
@@ -94,3 +104,4 @@ a=newR
 b= foundR a manu
 c= foundR b lara
 d=linkR c lara manu hQ
+cities=[]
