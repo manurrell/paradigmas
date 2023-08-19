@@ -68,10 +68,12 @@ andA a= foldr (&&) True a
 verifyL :: Region -> [City] -> Bool     --chequear que en una region haya links desde una primera ciudad hasta una ultima con todas sus intermediarias
 verifyL (Reg c l t) (x1:(x2:xs)) | xs==[] = orA(map(linksL x1 x2) l) | otherwise = andA(orA(map(linksL x1 x2) l):(verifyL (Reg c l t) (x2:xs)):[])
 
-iflinkreturnlink :: City -> City -> Link -> Maybe a
-iflinkreturnlink c1 c2 l | (linksL c1 c2 l) = Just l | otherwise = Nothing
+iflinkreturnlink :: City -> City -> Link -> Link
+iflinkreturnlink c1 c2 l | (linksL c1 c2 l) = l | otherwise = error"no linkea"
 obtenerlinksordenados :: [Link] -> [City] -> [Link]
-obtenerlinksordenados l (x1:(x2:xs)) |xs==[]= map(iflinkreturnlink x1 x2) l | otherwise = ((map(iflinkreturnlink x1 x2) l):(obtenerlinksordenados l (x2:xs)):[])
+obtenerlinksordenados l (x1:(x2:xs)) | xs==[] = (map (iflinkreturnlink x1 x2) l) | ((map (iflinkreturnlink x1 x2) l):(map (obtenerlinksordenados l (x2:xs))):[])
+
+
 verifyC:: Region -> City -> Bool
 verifyC (Reg c l t) ciudad = elem ciudad c
 linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas directamente
