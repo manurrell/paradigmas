@@ -21,9 +21,9 @@ capacityQ (Qua tipo cap delay)= cap                 --obtener int capacidad
 delayQ :: Quality -> Float
 delayQ (Qua tipo cap delay)= delay                  --obtener float delay
 
-data Link = Lin City City Quality deriving (Show) ---------------------------------------------------
-instance Eq Link where
-    (Lin a b c) == (Lin aa bb cc) = ((a==aa)||(a==bb)) && ((b==aa)||(b==bb)) && (c==cc)
+data Link = Lin City City Quality deriving (Eq,Show) ---------------------------------------------------
+--instance Eq Link where
+--    (Lin a b c) == (Lin aa bb cc) = ((a==aa)||(a==bb)) && ((b==aa)||(b==bb)) && (c==cc)
 newL :: City -> City -> Quality -> Link
 newL ciudad1 ciudad2 calidad= Lin ciudad1 ciudad2 calidad
 connectsL :: City -> Link -> Bool                               --chequear si una ciudad forma parte de un link
@@ -62,8 +62,10 @@ data Region = Reg [City] [Link] [Tunel] deriving (Eq,Show) ---------------------
 newR= Reg [] [] []
 foundR :: Region -> City -> Region -- agrega una nueva ciudad a la región
 foundR (Reg ciudades links tuneles)  ciudad = Reg ( ciudad : ciudades) links tuneles
-linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de la región con un enlace de la calidad 
-linkR (Reg ciudades links tuneles) ciudad1 ciudad2 calidad=Reg ciudades ((newL ciudad1 ciudad2 calidad):links) tuneles
+linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de la región con un enlace de la calidad especificada
+linkR (Reg ciudades links tuneles) ciudad1 ciudad2 calidad | orA (map (linksL ciudad1 ciudad2) links) = error "ya existe un link establecido entre las dos ciudades"
+                                                            |otherwise= Reg ciudades ((newL ciudad1 ciudad2 calidad):links) tuneles
+
 
 andA :: [Bool] -> Bool
 andA a= foldr (&&) True a
@@ -86,13 +88,24 @@ delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indi
 delayR region ciudad1 ciudad2 | (verifyC region ciudad1) && (verifyC region ciudad2) = distC ciudad1 ciudad2 | otherwise = error" Las ciudades no pertenecn a esta region"
 tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
 tunelR (Reg c l t) ciudades | length ciudades==0 = error"ingrese al menos dos ciudades para construir tunel"
-                            |verifyL (Reg c l t) ciudades = Reg c l ((newT (obtenerlinksordenados l ciudades)):t)
--- connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
---linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas directamente
---linkedR (Reg ciudades
--- delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
--- availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades
+                            |not(verifyL (Reg c l t) ciudades) = error "no existe uno o mas de los links necesarios"
+                            |not(capCheck (obtenerlinksordenados l ciudades) t) = error "la capacidad disponible de alguno de los links no es suficiente para la construccion"              -- alguno de los links esta capeado
+                            |otherwise = Reg c l ((newT (obtenerlinksordenados l ciudades)):t)
 
+
+countA target = foldr (\each fold -> if target == each then fold + 1 else fold) 0
+
+capCheck :: [Link] -> [Tunel] -> Bool
+capCheck (x1:[]) t = (countA True (map (usesT x1) t)) < capacityL x1
+capCheck (x1:xs) t = andA ((countA True (map (usesT x1) t) < capacityL x1):(capCheck xs t):[])
+
+connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
+connectedR (Reg ciudades links tuneles) ciudad1 ciudad2= orA(map(connectsT ciudad1 ciudad2)tuneles)
+
+
+availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades enlazadas directamente
+availableCapacityForR (Reg c l t) c1 c2 | verifyL (Reg c l t) [c1, c2] = capacityL(head(obtenerlinksordenados l [c1, c2]))
+                                        |otherwise= error "no existe un link entre las dos ciudades"
 
 newLinks :: [City] -> Quality -> [Link]
 newLinks (x1:[]) q= []
@@ -107,7 +120,9 @@ lara= newC "neuquen" aa
 manu= newC "miau" bb
 esteban= newC "raul" cc
 sanma=newC "sanma" cc
-hQ= newQ "alta calidad" 10 0.2
+lQ= newQ "baja calidad" 1 1
+mQ= newQ "media calidad" 2 0.7
+hQ= newQ "alta calidad" 5 0.2
 linkLM= newL lara manu hQ
 linkME= newL manu esteban hQ
 linkML= newL manu lara hQ
@@ -120,3 +135,4 @@ b= foundR a manu
 c= foundR b lara
 d=linkR c lara manu hQ
 cities=[]
+miguel= newR
