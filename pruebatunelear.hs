@@ -21,7 +21,9 @@ capacityQ (Qua tipo cap delay)= cap                 --obtener int capacidad
 delayQ :: Quality -> Float
 delayQ (Qua tipo cap delay)= delay                  --obtener float delay
 
-data Link = Lin City City Quality deriving (Eq, Show) ---------------------------------------------------
+data Link = Lin City City Quality deriving (Show) ---------------------------------------------------
+instance Eq Link where
+    (Lin a b c) == (Lin aa bb cc) = ((a==aa)||(a==bb)) && ((b==aa)||(b==bb)) && (c==cc)
 newL :: City -> City -> Quality -> Link
 newL ciudad1 ciudad2 calidad= Lin ciudad1 ciudad2 calidad
 connectsL :: City -> Link -> Bool                               --chequear si una ciudad forma parte de un link
