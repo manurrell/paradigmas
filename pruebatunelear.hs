@@ -82,9 +82,9 @@ linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan 
 linkedR (Reg ciudades links tuneles) ciudad1 ciudad2 = orA(map (linksL ciudad1 ciudad2) links)
 delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
 delayR region ciudad1 ciudad2 | (verifyC region ciudad1) && (verifyC region ciudad2) = distC ciudad1 ciudad2 | otherwise = error" Las ciudades no pertenecn a esta region"
---tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
---tunelR (Reg c l t) ciudades | length ciudades==0 = error"ingrese al menos dos ciudades para construir tunel"
---                            |verifyL (Reg c l t) ciudades = Reg c l ((newT )
+tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
+tunelR (Reg c l t) ciudades | length ciudades==0 = error"ingrese al menos dos ciudades para construir tunel"
+                            |verifyL (Reg c l t) ciudades = Reg c l ((newT (obtenerlinksordenados l ciudades)):t)
 -- connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
 --linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas directamente
 --linkedR (Reg ciudades
@@ -104,10 +104,14 @@ cc= newP 2 2
 lara= newC "neuquen" aa
 manu= newC "miau" bb
 esteban= newC "raul" cc
+sanma=newC "sanma" cc
 hQ= newQ "alta calidad" 10 0.2
 linkLM= newL lara manu hQ
 linkME= newL manu esteban hQ
+linkML= newL manu lara hQ
+linkSL=newL sanma lara hQ
 tunelLM= newT [linkLM]
+tunelML= newT [linkML]
 tunelLME= newT  [linkLM,linkME]
 a=newR
 b= foundR a manu
