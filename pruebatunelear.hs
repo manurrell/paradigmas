@@ -82,7 +82,7 @@ obtenerlinksordenados _ _ = error "una o mas listas estan vacias"
 
 verifyC:: Region -> City -> Bool
 verifyC (Reg c l t) ciudad = elem ciudad c
-linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas directamente
+linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas DIRECTAMENTE
 linkedR (Reg ciudades links tuneles) ciudad1 ciudad2 = orA(map (linksL ciudad1 ciudad2) links)
 delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
 delayR region ciudad1 ciudad2 | (verifyC region ciudad1) && (verifyC region ciudad2) = distC ciudad1 ciudad2 | otherwise = error" Las ciudades no pertenecn a esta region"
@@ -95,19 +95,19 @@ tunelR (Reg c l t) ciudades | length ciudades==0 = error"ingrese al menos dos ci
 
 countA target = foldr (\each fold -> if target == each then fold + 1 else fold) 0
 
-capCheck :: [Link] -> [Tunel] -> Bool
+capCheck :: [Link] -> [Tunel] -> Bool       --chequear si todos los links de la lista tienen capacidad disponible contando sus apariciones en los tuneles provistos
 capCheck (x1:[]) t = (countA True (map (usesT x1) t)) < capacityL x1
 capCheck (x1:xs) t = andA ((countA True (map (usesT x1) t) < capacityL x1):(capCheck xs t):[])
 
-connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
+connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel en una region
 connectedR (Reg ciudades links tuneles) ciudad1 ciudad2= orA(map(connectsT ciudad1 ciudad2)tuneles)
 
 
-availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades enlazadas directamente
+availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades enlazadas DIRECTAMENTE (dijo emilio)
 availableCapacityForR (Reg c l t) c1 c2 | verifyL (Reg c l t) [c1, c2] = capacityL(head(obtenerlinksordenados l [c1, c2]))
                                         |otherwise= error "no existe un link entre las dos ciudades"
 
-newLinks :: [City] -> Quality -> [Link]
+newLinks :: [City] -> Quality -> [Link]         --crea multiples links que enlacen a las ciudades provistas, desde la primera hasta la ultima, y los devuelve en una lista
 newLinks (x1:[]) q= []
 newLinks (x1:(x2:xs)) q= (newL x1 x2 q):(newLinks (x2:xs) q)
 
