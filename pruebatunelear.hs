@@ -42,9 +42,8 @@ delayL(Lin ciudad1 ciudad2 calidad)= (distC ciudad1 ciudad2)/(delayQ calidad)   
 data Tunel = Tun [Link] deriving (Eq, Show) ---------------------------------------------------
 orA :: [Bool] -> Bool
 orA a= foldr (||) False a
-verifyLinkEntry :: City -> Link -> Bool
-verifyLinkEntry ciudad (Lin ciudad1 ciudad2 q) | ciudad1==ciudad = True
-                                                                           | otherwise = False 
+verifyLinkEntry :: City -> [Link] -> Bool
+verifyLinkEntry ciudad (x1:x2:xs) | connectsL ciudad x1 && not(connectsL ciudad x2) = True | otherwise = False
 verifyLinkExit :: City -> Link -> Bool
 verifyLinkExit ciudad (Lin ciudad1 ciudad2 q) | ciudad2==ciudad = True | otherwise = False 
 newT :: [Link] -> Tunel
