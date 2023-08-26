@@ -14,7 +14,7 @@ newT links= Tun links
 connectsT :: City -> City -> Tunel -> Bool -- inidca si este tunel conceta estas dos ciudades distintas
 connectsT ciudad1 ciudad2 (Tun links) | (verifyLinkEntry ciudad1 links && verifyLinkExit ciudad2 links ) || (verifyLinkEntry ciudad2 links && verifyLinkExit ciudad1  links) = True
                                       | otherwise = False
-usesT :: Link -> Tunel -> Bool  -- indica si este tunel atraviesa ese 
+usesT :: Link -> Tunel -> Bool  -- indica si este tunel atraviesa ese link
 usesT link (Tun links)= elem link links 
 delayT :: Tunel -> Float -- la demora que sufre una conexion en este tunel
 delayT (Tun links) =  sum(map delayL links)
