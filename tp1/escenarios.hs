@@ -6,13 +6,13 @@ import Link
 import Region
 
 -- variables para testear los escenarios
-punto1= newP 0 0
-punto2= newP 1 1
-punto3= newP 2 2
-ciudad1= newC "neuquen" punto1
-ciudad2= newC "miau" punto2
+p1= newP 0 0
+p2= newP 1 1
+p3= newP 2 2
+ciudad1= newC "Neuquén" punto1
+ciudad2= newC "Vaduz" punto2
 ciudad3= newC "raul" punto3
-sanma=newC "sanma" punto3
+ciudad4=newC "San Martín de los Andes" punto3
 lowQuality= newQ "baja calidad" 1 1
 midQuality= newQ "media calidad" 2 0.7
 highQuality= newQ "alta calidad" 5 0.2
