@@ -29,3 +29,6 @@ c= foundR b ciudad1
 d=linkR c ciudad1 ciudad2 highQuality
 
 verification_list=[linksL ciudad1 ciudad2 link12, linksL ciudad1 ciudad2 link21, distanceC ciudad1 ciudad2 == difP punto1 punto2]
+
+---------------------- Error Verifications
+e1= linkR d ciudad1 ciudad2 highQuality
