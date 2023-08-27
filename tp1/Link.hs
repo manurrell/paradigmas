@@ -4,8 +4,8 @@ import City
 import Quality
 data Link = Lin City City Quality deriving (Eq, Show)
 newL :: City -> City -> Quality -> Link                        -- genera un link entre dos ciudades distintas
-newL ciudad1 ciudad2 calidad= Lin ciudad1 ciudad2 calidad
-connectsL :: City -> Link -> Bool                               -- indica si esta ciudad es parte de este link
+newL ciudad1 ciudad2 calidad = Lin ciudad1 ciudad2 calidad
+connectsL :: City -> Link -> Bool                              -- indica si esta ciudad es parte de este link
 connectsL c (Lin c1 c2 q) | c==c1 = True
                                         | c==c2 = True
                                         | otherwise = False

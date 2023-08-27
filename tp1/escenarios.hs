@@ -35,7 +35,11 @@ f= linkR e ciudad2 ciudad3 lowQuality
 g= tunelR f [ciudad2, ciudad3]
 i= foundR g ciudad4
 
-verification_list=[linksL ciudad1 ciudad2 link12, linksL ciudad1 ciudad2 link21, distanceC ciudad1 ciudad2 == difP p1 p2, linkedR d ciudad1 ciudad2, link12/=link21, tunel13/=tunel123]
+verification_list=[linksL ciudad1 ciudad2 link12,
+                    linksL ciudad1 ciudad2 link21,
+                    distanceC ciudad1 ciudad2 == difP p1 p2, linkedR d ciudad1 ciudad2,
+                    link12/=link21, tunel13/=tunel123,
+                    connectsT ciudad1 ciudad2 tunel12 && connectsT ciudad1 ciudad2 tunel21]
 
 ---------------------- Error Verifications
 testF :: Show a => a -> Bool
@@ -48,19 +52,13 @@ testF action = unsafePerformIO $ do
         isException :: SomeException -> Maybe ()
         isException _ = Just ()
 ---------------- Error List
-errorVerificationList=[linkR d ciudad1 ciudad2 highQuality,
+regionErrorList=[linkR d ciudad1 ciudad2 highQuality,
                         tunelR d [ciudad1],
                         tunelR g [ciudad1, ciudad3],
                         linkR d ciudad1 ciudad2 midQuality,
                         linkR d ciudad1 ciudad3 highQuality
                         ]
-listError= map testF errorVerificationList -- ejecutar esta variable en consola para ver la lista  de errores
-
----------------------- Error variables
-e1= availableCapacityForR i ciudad3 ciudad4
-e2= delayR d ciudad1 ciudad4
---e3=
--- availableCapacityForR i ciudad3 ciudad4 no se puede probar en la lista porq le agarra down pero metelo en la consola y funca de 10
---no entiendo hacelo
---errores hechos hasta ahora_ linkr, tunelr, avaliablecapacityforr, 
-
+e1 = testF (newT [])
+e2 = testF (delayR d ciudad1 ciudad4)
+e3 = testF (availableCapacityForR i ciudad3 ciudad4)
+listError = (map testF regionErrorList) ++ [e1] ++ [e2] ++ [e3]  -- ejecutar esta variable en consola para ver la lista  de errores
