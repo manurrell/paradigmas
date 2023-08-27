@@ -1,3 +1,3 @@
-Repositorio para materia Paradigmas de Programación\n
-Profesor: Emilio Ocan
+Repositorio para materia Paradigmas de Programación
+Profesor: Emilio Oca
 Integrantes del grupo: Lara Leporace y Manuel Borrell
