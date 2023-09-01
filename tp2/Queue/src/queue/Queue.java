@@ -21,16 +21,21 @@ public class Queue {
 
   public Object take() {
     // TODO Auto-generated method stub
-	  if (this.toDoList.size()==0) {
-		  throw new RuntimeException("Queue is empty");
+	  if (this.size()==0) {
+		  throw new Error("Queue is empty");
+	  } else {
+		  
+		  Object cabeza= this.head();
+		  this.toDoList.remove((toDoList.size())-1);
+		  return cabeza;
 	  }
-	  Object cabeza= this.head();
-	  this.toDoList.remove((toDoList.size())-1);
-		return cabeza;
 	}
 
   public Object head() {
 		// TODO Auto-generated method stub
+	if (this.size()==0) {
+		throw new Error("Queue is empty");
+	}
     return this.toDoList.get((toDoList.size())-1);
 	}
 
