@@ -5,17 +5,17 @@ import java.util.List;
 public class Queue {
 	
 	
-  private List<Object>  toDoList = new ArrayList<>();
+  private List<Object>  lista = new ArrayList<>();
   
   
   public boolean isEmpty() {
 		// TODO Auto-generated method stub
-		return this.toDoList.isEmpty();
+		return this.lista.isEmpty();
 	}
 
   public Queue add( Object  cargo ) {
 		// TODO Auto-generated method stub
-	  this.toDoList.add(0, cargo);
+	  this.lista.add(0, cargo);
 		return this;
 	}
 
@@ -26,7 +26,7 @@ public class Queue {
 	  } else {
 		  
 		  Object cabeza= this.head();
-		  this.toDoList.remove((toDoList.size())-1);
+		  this.lista.remove((lista.size())-1);
 		  return cabeza;
 	  }
 	}
@@ -36,12 +36,12 @@ public class Queue {
 	if (this.size()==0) {
 		throw new Error("Queue is empty");
 	}
-    return this.toDoList.get((toDoList.size())-1);
+    return this.lista.get((lista.size())-1);
 	}
 
   public int size() {
 		// TODO Auto-generated method stub
-		return this.toDoList.size();
+		return this.lista.size();
 	}
 
 }
