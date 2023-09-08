@@ -2,15 +2,23 @@ package queue;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Queue {
+public abstract class Queue {
 	
 	
   private List<Object>  lista = new ArrayList<>();
   
   
+  //public Queue() {} 				metodo constructor por default
+  
+  //public Queue(List<Object> l) {   lista= l }			constructor especializado
+  
+  
+  
+  
+  
   public boolean isEmpty() {
 		// TODO Auto-generated method stub
-		return this.lista.isEmpty();
+		return this.lista.vacio();
 	}
 
   public Queue add( Object  cargo ) {
@@ -44,4 +52,8 @@ public class Queue {
 		return this.lista.size();
 	}
 
+  abstract SubArray vacio();
 }
+ 
+
+
