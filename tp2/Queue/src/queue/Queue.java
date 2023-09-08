@@ -21,7 +21,7 @@ public class Queue {
   public Queue add( Object  cargo ) {
 		// TODO Auto-generated method stub
 	  
-	  this.lista.añadir(cargo ));
+	  this.lista.añadir(cargo );
 		return this;
 	}
 

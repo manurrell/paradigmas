@@ -9,7 +9,7 @@ public class Vacia extends Array {
 	
 public NoVacia añadir(Object cargo) {
 	
-		return Array.noVacio((new ArrayList<>()).);
+		return Array.noVacio((new ArrayList<>()).a);
 	}
 
 }
