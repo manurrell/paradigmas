@@ -5,7 +5,7 @@ import java.util.List;
 public class Queue {
 	
 	
-  private List<Object>  lista = new ArrayList<>();
+  private Array lista = Array.vacio();
   
   
   //public Queue() {} 				metodo constructor por default
@@ -15,12 +15,13 @@ public class Queue {
   
   public boolean isEmpty() {
 		// TODO Auto-generated method stub
-		return this.lista.isEmpty();
+		return this.lista.esVacio();
 	}
 
   public Queue add( Object  cargo ) {
 		// TODO Auto-generated method stub
-	  this.lista.add(0, cargo);
+	  
+	  this.lista.añadir(cargo ));
 		return this;
 	}
 
