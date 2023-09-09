@@ -21,7 +21,7 @@ public class Queue {
   public Queue add( Object  cargo ) {
 		// TODO Auto-generated method stub
 	  
-	  lista.add((lista.get(lista.size()-1)).añadir(cargo));
+	  lista.addAll(1,(lista.get(lista.size()-1)).añadir(cargo));
 	  
 		return this;
 	}
@@ -29,8 +29,8 @@ public class Queue {
   public Object take() {
     // TODO Auto-generated method stub
 	  this.head();
-	  this.lista.get()
-	  return 
+	  //this.lista.get()
+	  //return 
 	  if (this.size()==0) {
 		  throw new Error("Queue is empty");
 	  } else {

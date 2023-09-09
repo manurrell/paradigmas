@@ -1,5 +1,7 @@
 package queue;
 
+import java.util.ArrayList;
+
 public class Vacia extends Array {
 	public boolean esVacio() {
 		return true;
@@ -8,9 +10,10 @@ public class Vacia extends Array {
 public Object cabeza() {
 	throw new Error("Queue is empty");
 }
-public NoVacia añadir(Object cargo) {
-	
-	return Array.noVacio(cargo);
+public ArrayList<NoVacia> añadir(Object cargo) {
+	ArrayList a = new ArrayList<>();
+	a.add(Array.noVacio(cargo));
+	return a;
 }
 public int tamaño() {
 	return 0;

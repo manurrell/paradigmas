@@ -1,6 +1,7 @@
 package queue;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public abstract class Array {
 	static Vacia vacio() {
@@ -10,7 +11,7 @@ public abstract class Array {
 		return new NoVacia(cargo);
 	}
 	public abstract Object cabeza();
-	public abstract NoVacia añadir(Object cargo);
+	public abstract ArrayList<NoVacia> añadir(Object cargo);
 	public abstract boolean esVacio(); 
 	public abstract int tamaño();
 }
