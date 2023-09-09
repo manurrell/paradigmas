@@ -22,11 +22,15 @@ public class Queue {
 		// TODO Auto-generated method stub
 	  
 	  lista.add((lista.get(lista.size()-1)).añadir(cargo));
+	  
 		return this;
 	}
 
   public Object take() {
     // TODO Auto-generated method stub
+	  this.head();
+	  this.lista.get()
+	  return 
 	  if (this.size()==0) {
 		  throw new Error("Queue is empty");
 	  } else {
