@@ -9,6 +9,7 @@ public abstract class Array {
 	static NoVacia noVacio( Object cargo) {
 		return new NoVacia(cargo);
 	}
+	public abstract Object cabeza();
 	public abstract NoVacia añadir(Object cargo);
 	public abstract boolean esVacio(); 
 }

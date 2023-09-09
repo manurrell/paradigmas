@@ -12,6 +12,9 @@ public class NoVacia extends Array {
 		this.lista.add(0, cargo);
 		return this;
 	}
+	public Object cabeza() {
+		return lista.get(lista.size()-1);
+	}
 	public boolean esVacio() {
 		return false;
 	}

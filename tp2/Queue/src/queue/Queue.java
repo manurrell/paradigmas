@@ -39,12 +39,9 @@ public class Queue {
 
   public Object head() {
 		// TODO Auto-generated method stub
-	if (this.size()==0) {
-		throw new Error("Queue is empty");
+	return lista.get(lista.size()-1).cabeza();
+		
 	}
-    return this.lista.get((lista.size())-1);
-	}
-
   public int size() {
 		// TODO Auto-generated method stub
 		return this.lista.size();

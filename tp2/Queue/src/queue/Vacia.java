@@ -5,7 +5,9 @@ public class Vacia extends Array {
 		return true;
 	}
 	
-
+public Object cabeza() {
+	throw new Error("Queue is empty");
+}
 public NoVacia añadir(Object cargo) {
 	
 	return Array.noVacio(cargo);
