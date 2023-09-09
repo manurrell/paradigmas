@@ -5,23 +5,23 @@ import java.util.List;
 public class Queue {
 	
 	
-  private Array lista = Array.vacio();
+  private ArrayList<Array> lista = new ArrayList<Array>();
+  // ArrayList vs List
   
-  
-  //public Queue() {} 				metodo constructor por default
+  public Queue() {lista.add(Array.vacio());} 	
   
   //public Queue(List<Object> l) {   lista= l }			constructor especializado
   
   
   public boolean isEmpty() {
 		// TODO Auto-generated method stub
-		return this.lista.esVacio();
+		return lista.get(lista.size()-1).esVacio();
 	}
 
   public Queue add( Object  cargo ) {
 		// TODO Auto-generated method stub
 	  
-	  this.lista.añadir(cargo );
+	  lista.add((lista.get(lista.size()-1)).añadir(cargo));
 		return this;
 	}
 

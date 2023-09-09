@@ -3,12 +3,12 @@ package queue;
 import java.util.ArrayList;
 
 public abstract class Array {
-	static Array vacio() {
+	static Vacia vacio() {
 		return new Vacia();
 	}
-	static Array noVacio( ArrayList<Object> argList) {
-		return new NoVacia(argList);
+	static NoVacia noVacio( Object cargo) {
+		return new NoVacia(cargo);
 	}
-	public abstract NoVacia añadir();
+	public abstract NoVacia añadir(Object cargo);
 	public abstract boolean esVacio(); 
 }
