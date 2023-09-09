@@ -11,7 +11,7 @@ public Object cabeza() {
 	throw new Error("Queue is empty");
 }
 public ArrayList<NoVacia> añadir(Object cargo) {
-	ArrayList a = new ArrayList<>();
+	ArrayList<NoVacia> a = new ArrayList<>();
 	a.add(Array.noVacio(cargo));
 	return a;
 }
