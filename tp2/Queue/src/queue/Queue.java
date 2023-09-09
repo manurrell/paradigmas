@@ -44,7 +44,7 @@ public class Queue {
 	}
   public int size() {
 		// TODO Auto-generated method stub
-		return this.lista.size();
+		return this.lista.get(lista.size()-1).tamaño();
 	}
 
 }

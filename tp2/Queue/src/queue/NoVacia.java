@@ -18,6 +18,8 @@ public class NoVacia extends Array {
 	public boolean esVacio() {
 		return false;
 	}
-
+	public int tamaño() {
+		return lista.size();
+	}
 	
 }

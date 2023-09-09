@@ -12,7 +12,9 @@ public NoVacia añadir(Object cargo) {
 	
 	return Array.noVacio(cargo);
 }
-
+public int tamaño() {
+	return 0;
+}
 
 
 }

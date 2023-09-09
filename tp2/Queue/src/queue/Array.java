@@ -12,4 +12,5 @@ public abstract class Array {
 	public abstract Object cabeza();
 	public abstract NoVacia añadir(Object cargo);
 	public abstract boolean esVacio(); 
+	public abstract int tamaño();
 }
