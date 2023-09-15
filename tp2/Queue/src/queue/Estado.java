@@ -9,11 +9,11 @@ public abstract class Estado {
 		return new Vacio();	
 	}
 	
-	static Estado newNoVacio() {
-		return new NoVacio();
+	static Estado newNoVacio(Object elemento) {
+		return new NoVacio(elemento);
 	}
 	
-	
+	public abstract boolean esVacio();
+	public abstract Object devolverElement();
 	public abstract ArrayList<Estado> retroceder(ArrayList<Estado> historial);
-	public abstract void verifyEmpty();
 }
