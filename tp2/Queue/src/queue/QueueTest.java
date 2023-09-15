@@ -1,10 +1,11 @@
 package queue;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 
 public class QueueTest {
@@ -39,8 +40,8 @@ public class QueueTest {
 
   @Test public void test06QueueBehavesFIFO() {
     Queue queue = new Queue();
-    String firstAddedObject = "First";
-    String secondAddedObject = "Second";
+    String firstAddedObject = FIRST;
+    String secondAddedObject = SECOND;
 
     queue.add( firstAddedObject );
     queue.add( secondAddedObject );
@@ -52,10 +53,10 @@ public class QueueTest {
 
   @Test public void test07HeadReturnsFirstAddedObject() {
     Queue queue = new Queue();
-    String firstAddedObject = "First";
+    String firstAddedObject = FIRST;
 
     queue.add( firstAddedObject );
-    queue.add( "Second" );
+    queue.add( SECOND );
 
     assertEquals( queue.head(), firstAddedObject );
   }
@@ -68,29 +69,35 @@ public class QueueTest {
   }
 
   @Test public void test09SizeRepresentsObjectInTheQueue() {
-    assertEquals( 2, new Queue().add( "First" ).add( "Second" ).size() );
+    assertEquals( 2, new Queue().add( FIRST ).add( SECOND ).size() );
   }
 
   @Test public void test10CanNotTakeWhenThereAreNoObjectsInTheQueue() {
-    assertEquals(Vacio.QUEUE_IS_EMPTY,assertThrows(Error.class, ()-> new Queue().take()).getMessage());
+	assertThrowsLike(Vacio.QUEUE_IS_EMPTY, ()-> new Queue().take());
    
   }
 
   @Test public void test09CanNotTakeWhenThereAreNoObjectsInTheQueueAndTheQueueHadObjects() {
     Queue queue = queueWithSomething();
     queue.take();
-    assertEquals(Vacio.QUEUE_IS_EMPTY,assertThrows(Error.class, ()-> queue.take()).getMessage());
-    
+    assertThrowsLike(Vacio.QUEUE_IS_EMPTY, ()-> queue.take());
   }
 
   @Test public void test10CanNotHeadWhenThereAreNoObjectsInTheQueue() {
-    assertEquals(Vacio.QUEUE_IS_EMPTY,assertThrows(Error.class, ()-> new Queue().head()).getMessage());
-    
+	assertThrowsLike(Vacio.QUEUE_IS_EMPTY, ()-> new Queue().head());
 
   }
   
+  private static final String SECOND = "Second";
+  private static final String FIRST = "First";
+  
   private Queue queueWithSomething() {
 	  return new Queue().add( "Something" );
+  }
+  
+  private void assertThrowsLike(String msg, Executable exe) {		//executable vs runnable
+	  assertEquals(msg, assertThrows(Error.class, exe).getMessage());
+	  
   }
 
 }

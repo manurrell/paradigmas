@@ -6,7 +6,7 @@ public class Vacio extends Estado {
 
 	public static final String QUEUE_IS_EMPTY = "Queue is empty";
 
-	public ArrayList<Estado> retroceder(ArrayList<Estado> historial) {
+	public ArrayList<Estado> quitar(ArrayList<Estado> historial) {
 		throw new Error(QUEUE_IS_EMPTY);
 	}
 	
