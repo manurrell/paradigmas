@@ -73,15 +73,8 @@ public class QueueTest {
   }
 
   @Test public void test10CanNotTakeWhenThereAreNoObjectsInTheQueue() {
-    Queue queue = new Queue();
     assertEquals(Vacio.QUEUE_IS_EMPTY,assertThrows(Error.class, ()-> new Queue().take()).getMessage());
-    
-    try {
-      queue.take();
-      fail( "Expected Error was not thrown." );
-    } catch (Error e) {
-      assertTrue( e.getMessage().equals( Vacio.QUEUE_IS_EMPTY ) );
-    }
+   
   }
 
   @Test public void test09CanNotTakeWhenThereAreNoObjectsInTheQueueAndTheQueueHadObjects() {
@@ -89,24 +82,12 @@ public class QueueTest {
     queue.take();
     assertEquals(Vacio.QUEUE_IS_EMPTY,assertThrows(Error.class, ()-> queue.take()).getMessage());
     
-    try {
-      queue.take();
-      fail( "Expected Error was not thrown." );
-    } catch (Error e) {
-      assertTrue( e.getMessage().equals( Vacio.QUEUE_IS_EMPTY ) );
-    }
   }
 
   @Test public void test10CanNotHeadWhenThereAreNoObjectsInTheQueue() {
-    Queue queue = new Queue();
     assertEquals(Vacio.QUEUE_IS_EMPTY,assertThrows(Error.class, ()-> new Queue().head()).getMessage());
     
-    try {
-      queue.head();
-      fail( "Expected Error was not thrown." );
-    } catch (Error e) {
-      assertTrue( e.getMessage().equals( Vacio.QUEUE_IS_EMPTY ) );
-    }
+
   }
   private Queue queueWithSomething() {
 	  return new Queue().add( "Something" );
