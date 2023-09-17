@@ -95,7 +95,7 @@ public class QueueTest {
 	  return new Queue().add( "Something" );
   }
   
-  private void assertThrowsLike(String msg, Executable exe) {		//executable vs runnable
+  private void assertThrowsLike(String msg, Executable exe) {
 	  assertEquals(msg, assertThrows(Error.class, exe).getMessage());
 	  
   }
