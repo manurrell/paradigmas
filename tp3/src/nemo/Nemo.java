@@ -1,26 +1,40 @@
 package nemo;
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.Arrays;
 
 public class Nemo {
-	private ArrayList<Integer> cords= new ArrayList<>();
-	private ArrayList<Container> cap_list= new ArrayList<>();
+	private Coordinates cords;
 	private ArrayList<Estados> state_list= new ArrayList<>();
-	private Cardinal aim= new North();
+	private ArrayList<Instruction> instruction_list; 
+	private Cardinal aim;
+	private char[] a;
 	
-	public int getCapsuleAmount() {
-		return (cap_list.size()-1);
+	
+	public Nemo(int x,int y,int z,Cardinal aim){
+		cords=new Coordinates(x,y,z);
+		this.aim=aim;
+		instruction_list=new ArrayList<>(Arrays.asList(new Instruction('f',()-> this.moveFoward()),new Instruction('r',()->this.turnRigth())));
+	}
+	public void moveFoward() {
+		aim.move(cords);
+	}
+	public void turnRigth() {
+		aim= aim.turnRigth();
+	}
+	public void executeInstruction(String commandos) {
+		commandos.chars().forEach(instruction_list.stream().filter(Each==chr));
+		
 	}
 	public Cardinal getAim() {
 		return aim;
 	}
 	public int getX(){
-		return cords.get(0);
+		return cords.getX();
 	}
 	public int getY(){
-		return cords.get(1);
+		return cords.getY();
 	}
 	public int getZ(){
-		return cords.get(2);
+		return cords.getZ();
 	}
 }

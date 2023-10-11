@@ -7,102 +7,90 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 public class NemoTest {
+private static final North NORTE = new North();
+private static final South SUR = new South();
+private static final East ESTE = new East();
+private static final West OESTE = new West();
 @Test public void test01NewNemo() {
-	Nemo sub = new Nemo();	
+	Nemo sub = new Nemo(0,0,0,NORTE);	
 	assertEquals(0,sub.getX());
 	assertEquals(0,sub.getY());
 	assertEquals(0,sub.getZ());
-	assertEquals("N",sub.getAim());
-	assertEquals(5,sub.getCapsuleAmount());
+	assertEquals(NORTE,sub.getAim());
 }
 @Test public void test02DoNothingEmptyInsruction() {
-	Nemo sub = new Nemo();
+	Nemo sub = new Nemo(0,0,0,NORTE);
 	sub.executeInstruction("");
 	assertEquals(0,sub.getX());
 	assertEquals(0,sub.getY());
 	assertEquals(0,sub.getZ());
-	assertEquals("N",sub.getAim());
-	assertEquals(5,sub.getCapsuleAmount());
+	assertEquals(NORTE,sub.getAim());
 }
 @Test public void test03MoveFoward() {
-	Nemo sub = new Nemo();
-	sub.executeIntruction("f");
+	Nemo sub = new Nemo(0,0,0,NORTE);
+	sub.executeInstruction("f");
 	assertEquals(1,sub.getX());
 	assertEquals(0,sub.getY());
 	assertEquals(0,sub.getZ());
-	assertEquals("N",sub.getAim());
-	assertEquals(5,sub.getCapsuleAmount());	
+	assertEquals(NORTE,sub.getAim());
 }
 @Test public void test04Descend() {
-	Nemo sub = new Nemo();
-	sub.executeIntruction("d");
+	Nemo sub = new Nemo(0,0,0,NORTE);
+	sub.executeInstruction("d");
 	assertEquals(0,sub.getX());
 	assertEquals(0,sub.getY());
 	assertEquals(-1,sub.getZ());
-	assertEquals("N",sub.getAim());
-	assertEquals(5,sub.getCapsuleAmount());
+	assertEquals(NORTE,sub.getAim());
 }
 @Test public void test05NotAscendWhenOnSurface() {
-	Nemo sub = new Nemo();
-	sub.executeIntruction("u");	
+	Nemo sub = new Nemo(0,0,0,NORTE);
+	sub.executeInstruction("u");	
 	assertEquals(0,sub.getX());
 	assertEquals(0,sub.getY());
 	assertEquals(0,sub.getZ());
-	assertEquals("N",sub.getAim());
+	assertEquals(NORTE,sub.getAim());
 }
 @Test public void test06RotateLeft() {
-	Nemo sub = new Nemo();
-	sub.executeIntruction("l");
+	Nemo sub = new Nemo(0,0,0,NORTE);
+	sub.executeInstruction("l");
 	assertEquals(0,sub.getX());
 	assertEquals(0,sub.getY());
 	assertEquals(0,sub.getZ());
 	assertEquals("O",sub.getAim());
 }
 @Test public void test07RotateR() {
-	Nemo sub = new Nemo();
-	sub.executeIntruction("r");
+	Nemo sub = new Nemo(0,0,0,NORTE);
+	sub.executeInstruction("r");
 	assertEquals(0,sub.getX());
 	assertEquals(0,sub.getY());
 	assertEquals(0,sub.getZ());
 	assertEquals("E",sub.getAim());
 }
 @Test public void test08InstructionChain() {
-	Nemo sub = new Nemo();
-	sub.executeIntruction("fffddadaf");
+	Nemo sub = new Nemo(0,0,0,NORTE);
+	sub.executeInstruction("fffddadaf");
 	assertEquals(4,sub.getX());
 	assertEquals(0,sub.getY());
 	assertEquals((-1),sub.getZ());
-	assertEquals("N",sub.getAim());
+	assertEquals(NORTE,sub.getAim());
 }
 @Test public void test09InstructionChainWithDirections() {
-	Nemo sub = new Nemo();
-	sub.executeIntruction("rfffrffddarl");	
+	Nemo sub = new Nemo(0,0,0,NORTE);
+	sub.executeInstruction("rfffrffddarl");	
 	assertEquals(-3,sub.getX());
 	assertEquals(-2,sub.getY());
 	assertEquals(-1,sub.getZ());
 	assertEquals("E",sub.getAim());
 }
-@Test public void test10NewNemoRelease() {
-	Nemo sub = new Nemo();
-	assertEquals(5,sub.getCapsuleAmount());
-	sub.executeIntruction("m");
-	assertEquals(4,sub.getCapsuleAmount());
-}
-@Test public void test11NewNemoAttemptsSafeReleaseOf6Capsules() {
-	Nemo sub = new Nemo();
-	assertEquals(5,sub.getCapsuleAmount());
-	sub.executeIntruction("mmmmmm");
-	assertEquals(0,sub.getCapsuleAmount());
-}
+
+
 @Test public void test12brownieimplosion() {
-	Nemo sub = new Nemo();
-	assertEquals(5,sub.getCapsuleAmount());
-	assertThrowsLike("Brownie Moment", ()-> sub.executeIntruction("ddm"));
+	Nemo sub = new Nemo(0,0,0,NORTE);
+	assertThrowsLike("Brownie Moment", ()-> sub.executeInstruction("ddm"));
 }
 @Test public void test13brownieimplosionPT2() {
-	Nemo sub = new Nemo();
-	assertEquals(5,sub.getCapsuleAmount());
-	assertThrowsLike("Brownie Moment", ()-> sub.executeIntruction("mmmmmddm"));
+	Nemo sub = new Nemo(0,0,0,NORTE);
+	assertThrowsLike("Brownie Moment", ()-> sub.executeInstruction("mmmmmddm"));
 }
 
 private void assertThrowsLike(String msg, Executable exe) {
