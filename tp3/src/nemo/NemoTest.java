@@ -18,6 +18,15 @@ private static final West OESTE = new West();
 	assertEquals(0,sub.getZ());
 	assertEquals(NORTE,sub.getAim());
 }
+
+@Test public void test02DoNothingEmptyInsruction() {
+	Nemo sub = new Nemo(0,0,0,NORTE);
+	sub.executeInstruction("a");
+	assertEquals(0,sub.getX());
+	assertEquals(0,sub.getY());
+	assertEquals(0,sub.getZ());
+	assertEquals(NORTE,sub.getAim());
+}
 @Test public void test02DoNothingEmptyInsruction() {
 	Nemo sub = new Nemo(0,0,0,NORTE);
 	sub.executeInstruction("");
