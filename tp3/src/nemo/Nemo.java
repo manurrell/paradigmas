@@ -42,7 +42,7 @@ public class Nemo {
 	}
 	public void descend() {
 		cords= cords.down();
-		state_list.get(state_list.)
+		state_list=state_list.get(state_list.size()-1).down(state_list);
 	}
 	public void up() {
 		
