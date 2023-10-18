@@ -24,6 +24,14 @@ public class Coordinates {
 		y+=1;
 		return this;
 	}
+	public Coordinates up() {
+		z+=1;
+		return this;
+	}
+	public Coordinates down() {
+		z-=1;
+		return this;
+	}
 	public int getX() {
 		return x;
 	}

@@ -1,14 +1,6 @@
 package nemo;
 
-public class Instruction {
-	private char chr;
-	private Runnable exe;
-	
-	public Instruction(char caracter, Runnable exe){
-		this.chr=caracter;
-		this.exe=exe;
-	}
-	public void execute() {
-		exe.run();
-	}
+public abstract class Instruction {
+	public abstract void execute(Nemo nemo); 
+	public abstract boolean applies(int c);
 }

@@ -7,4 +7,7 @@ public class South extends Cardinal {
 	public Cardinal turnRigth() {
 		return new West();
 	}
+	public Cardinal turnLeft() {
+		return new East();
+	}
 }
