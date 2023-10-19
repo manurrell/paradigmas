@@ -17,8 +17,18 @@ public class Surface extends Estados {
 
 	@Override
 	public ArrayList<Estados> down(ArrayList<Estados> list) {
-		// TODO Auto-generated method stub
-		return null;
+		list.add(new NotInDanger());
+		return list;
 	}
+
+
+	@Override
+	public Coordinates upIfAllowed(Coordinates cords) {
+		return cords;
+	}
+
+
+	
+
 
 }

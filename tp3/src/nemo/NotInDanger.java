@@ -19,4 +19,9 @@ public class NotInDanger extends Estados {
 		return list;
 	}
 
+	
+	public Coordinates upIfAllowed(Coordinates cords) {
+		return cords.up();
+	}
+
 }

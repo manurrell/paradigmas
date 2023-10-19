@@ -4,7 +4,7 @@ public class South extends Cardinal {
 	public void move(Coordinates cords){
 		cords.moveSouth();
 	}
-	public Cardinal turnRigth() {
+	public Cardinal turnRight() {
 		return new West();
 	}
 	public Cardinal turnLeft() {

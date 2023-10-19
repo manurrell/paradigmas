@@ -1,13 +1,13 @@
 package nemo;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class Nemo {
 	private Coordinates cords;
-	private ArrayList<Estados> state_list= new ArrayList<>();
+	private ArrayList<Estados> state_list= new ArrayList<>(Arrays.asList(new Surface()));
 	private ArrayList<Instruction> instruction_list; 
 	private Cardinal aim;
-	private char[] a;
 	
 	
 	public Nemo(int x,int y,Cardinal aim){
@@ -18,11 +18,11 @@ public class Nemo {
 	public void moveFoward() {
 		aim.move(cords);
 	}
-	public void turnRigth() {
-		aim= aim.turnRigth();
+	public void turnRight() {
+		aim= aim.turnRight();
 	}
 	public void executeInstruction(String commandos) {
-		commandos.chars().forEach(comando -> instruction_list.stream().filter(instructions -> instructions.applies(comando)).toList().get(0).execute(this));
+		commandos.chars().forEach(comando -> instruction_list.stream().filter(instructions -> instructions.applies(comando)).collect(Collectors.toList()).get(0).execute(this));
 	}
 	public Cardinal getAim() {
 		return aim;
@@ -45,7 +45,10 @@ public class Nemo {
 		state_list=state_list.get(state_list.size()-1).down(state_list);
 	}
 	public void up() {
-		
-		
+		cords=state_list.get(state_list.size()-1).upIfAllowed(cords);
+		state_list=state_list.get(state_list.size()-1).up(state_list);
+	}
+	public void release() {
+		state_list.get(state_list.size()-1).release();
 	}
 }
