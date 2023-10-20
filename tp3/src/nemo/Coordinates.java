@@ -3,11 +3,9 @@ package nemo;
 public class Coordinates {
 	private int x;
 	private int y;
-	private int z;
-	public Coordinates(int x, int y, int z){
+	public Coordinates(int x, int y){
 		this.x=x;
 		this.y=y;
-		this.z=z;
 	}
 	public void moveNorth() {
 		x+=1;
@@ -24,21 +22,11 @@ public class Coordinates {
 		y+=1;
 		return this;
 	}
-	public Coordinates up() {
-		z+=1;
-		return this;
-	}
-	public Coordinates down() {
-		z-=1;
-		return this;
-	}
+
 	public int getX() {
 		return x;
 	}
 	public int getY() {
 		return y;
-	}
-	public int getZ() {
-		return z;
 	}
 }

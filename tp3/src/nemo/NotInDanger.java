@@ -3,8 +3,7 @@ package nemo;
 import java.util.ArrayList;
 
 public class NotInDanger extends Estados {
-
-
+	private int depth=-1;
 	public void release() {
 	}
 
@@ -15,13 +14,11 @@ public class NotInDanger extends Estados {
 	
 
 	public ArrayList<Estados> down(ArrayList<Estados> list) {
-		list.add(new Danger());
+		list.add(new Danger(-2));
 		return list;
 	}
 
-	
-	public Coordinates upIfAllowed(Coordinates cords) {
-		return cords.up();
+	public int getDepth() {
+		return depth;
 	}
-
 }

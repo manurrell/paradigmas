@@ -11,7 +11,7 @@ public class Nemo {
 	
 	
 	public Nemo(int x,int y,Cardinal aim){
-		cords=new Coordinates(x,y,0);
+		cords=new Coordinates(x,y);
 		this.aim=aim;
 		instruction_list=new ArrayList<>(Arrays.asList(new IUp(),new IRight(), new ILeft(), new IForward(), new IDescend(), new IRelease()));
 	}
@@ -22,7 +22,10 @@ public class Nemo {
 		aim= aim.turnRight();
 	}
 	public void executeInstruction(String commandos) {
-		commandos.chars().forEach(comando -> instruction_list.stream().filter(instructions -> instructions.applies(comando)).collect(Collectors.toList()).get(0).execute(this));
+		commandos.chars().forEach(comando -> instruction_list.stream()
+				.filter(instructions -> instructions.applies(comando))
+				.collect(Collectors.toList()).get(0).execute(this));
+		
 	}
 	public Cardinal getAim() {
 		return aim;
@@ -34,18 +37,16 @@ public class Nemo {
 		return cords.getY();
 	}
 	public int getZ(){
-		return cords.getZ();
+		return state_list.get(state_list.size()-1).getDepth();
 	}
 	public void turnLeft() {
 		aim=aim.turnLeft();
 		
 	}
 	public void descend() {
-		cords= cords.down();
 		state_list=state_list.get(state_list.size()-1).down(state_list);
 	}
 	public void up() {
-		cords=state_list.get(state_list.size()-1).upIfAllowed(cords);
 		state_list=state_list.get(state_list.size()-1).up(state_list);
 	}
 	public void release() {
