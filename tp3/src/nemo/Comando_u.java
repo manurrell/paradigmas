@@ -1,10 +1,10 @@
 package nemo;
 
-public class IForward extends Instruction {
+public class Comando_u extends Instruction {
+	private int key = (int) 'u';
 	public void execute(Nemo nemo) {
-		nemo.moveFoward();
+		nemo.up();
 	}
-	private int key = 102;
 	public boolean applies(int c) {
 		return key ==c;
 	}

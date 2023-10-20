@@ -13,7 +13,8 @@ public class NemoTest {
 	private East EAST;
 	private West WEST;
 	private North NORTH;
-@BeforeEach public void arbol() {
+
+@BeforeEach public void setUp() {
 	SOUTH = new South();
 	EAST = new East();
 	WEST = new West();
@@ -35,17 +36,53 @@ public class NemoTest {
 	assertPosition(0,0,0,sub);
 	assertType(North.class,sub.getAim());
 }
-@Test public void test04RotateLeft() {
+@Test public void test04North_RotateLeft() {
 	Nemo sub = nemoAt_0_0_0_North();
 	sub.executeInstruction("l");
 	assertPosition(0,0,0,sub);
 	assertType(West.class,sub.getAim());
 }
-@Test public void test05RotateRight() {
+@Test public void test05North_RotateRight() {
 	Nemo sub = nemoAt_0_0_0_North();
 	sub.executeInstruction("r");
 	assertPosition(0,0,0,sub);
 	assertType(East.class,sub.getAim());
+}
+@Test public void test06East_RotateLeft() {
+	Nemo sub = new Nemo(0,0,EAST);
+	sub.executeInstruction("l");
+	assertPosition(0,0,0,sub);
+	assertType(North.class,sub.getAim());
+}
+@Test public void test07East_RotateRight() {
+	Nemo sub = new Nemo(0,0,EAST);
+	sub.executeInstruction("r");
+	assertPosition(0,0,0,sub);
+	assertType(South.class,sub.getAim());
+}
+@Test public void test08South_RotateLeft() {
+	Nemo sub = new Nemo(0,0,SOUTH);
+	sub.executeInstruction("l");
+	assertPosition(0,0,0,sub);
+	assertType(East.class,sub.getAim());
+}
+@Test public void test09South_RotateRight() {
+	Nemo sub = new Nemo(0,0,SOUTH);
+	sub.executeInstruction("r");
+	assertPosition(0,0,0,sub);
+	assertType(West.class,sub.getAim());
+}
+@Test public void test10West_RotateLeft() {
+	Nemo sub = new Nemo(0,0,WEST);
+	sub.executeInstruction("l");
+	assertPosition(0,0,0,sub);
+	assertType(South.class,sub.getAim());
+}
+@Test public void test11West_RotateRight() {
+	Nemo sub = new Nemo(0,0,WEST);
+	sub.executeInstruction("r");
+	assertPosition(0,0,0,sub);
+	assertType(North.class,sub.getAim());
 }
 @Test public void test06NemoCanDoFullRotationR() {
 	Nemo sub = nemoAt_0_0_0_North();
@@ -83,6 +120,12 @@ public class NemoTest {
 	assertPosition(0,1,0,sub);
 	assertType(West.class,sub.getAim());
 }
+@Test public void test11SimpleMovementChain() {
+	Nemo sub = nemoAt_0_0_0_North();
+	sub.executeInstruction("ffffffffffff");
+	assertPosition(12,0,0,sub);
+	assertType(North.class,sub.getAim());
+}
 @Test public void test12Descend() {
 	Nemo sub = nemoAt_0_0_0_North();
 	sub.executeInstruction("d");
@@ -95,19 +138,19 @@ public class NemoTest {
 	assertPosition(0,0,0,sub);
 	assertType(North.class,sub.getAim());
 }
-@Test public void test14InstructionChain() {
+@Test public void test13NotAscendWhenOnSurfaceAfterMovementChain() {
+	Nemo sub = nemoAt_0_0_0_North();
+	sub.executeInstruction("fflfddrfuduuuuuuuuuuuuu");	
+	assertPosition(3,1,0,sub);
+	assertType(North.class,sub.getAim());
+}
+@Test public void test14MovementChain() {
 	Nemo sub = nemoAt_0_0_0_North();
 	sub.executeInstruction("fffdduduf");
 	assertPosition(4,0,-1,sub);
 	assertType(North.class,sub.getAim());
 }
-@Test public void test15InstructionChainpt2() {
-	Nemo sub = nemoAt_0_0_0_North();
-	sub.executeInstruction("dd");
-	assertPosition(0,0,-2,sub);
-	assertType(North.class,sub.getAim());
-}
-@Test public void test16InstructionChainWithDirections() {
+@Test public void test16MovementChainWithDirections() {
 	Nemo sub = nemoAt_0_0_0_North();
 	sub.executeInstruction("rfffrffddurl");	
 	assertPosition(-2,-3,-1,sub);
@@ -131,18 +174,23 @@ public class NemoTest {
 	assertPosition(0,0,-1,sub);
 	assertType(North.class,sub.getAim());
 }
-@Test public void test20brownieimplosion_pt1() {
+@Test public void test20BrownieImplosion_ErrorWhenReleasingCapsuleAfterTwoDescents() {
 	Nemo sub = nemoAt_0_0_0_North();
 	assertThrowsLike(Danger.BROWNIE_MOMENT, ()-> sub.executeInstruction("ddm"));
 }
-@Test public void test21brownieimplosion_pt2() {
+@Test public void test21BrownieImplosion_ReleasingCapsulesDoesNotPreventErrorFromReleasingCapsuleAtDangerState() {
 	Nemo sub = nemoAt_0_0_0_North();
-	assertThrowsLike(Danger.BROWNIE_MOMENT, ()-> sub.executeInstruction("mmmmmddm"));
+	assertThrowsLike(Danger.BROWNIE_MOMENT, ()-> sub.executeInstruction("mmmmmdddm"));
 }
-@Test public void test22brownieimplosion_pt3() {
+@Test public void test22BrownieImplosion_MovementChainDoesNotPreventErrorFromReleasingCapsuleAtDangerState() {
 	Nemo sub = nemoAt_0_0_0_North();
 	assertThrowsLike(Danger.BROWNIE_MOMENT, ()-> sub.executeInstruction("fdrrrlfflffudfdm"));
 }
+@Test public void test23BrownieImplosion_NemoRemainsInDangerStateAfterNumerousDescents() {
+	Nemo sub = nemoAt_0_0_0_North();
+	assertThrowsLike(Danger.BROWNIE_MOMENT, ()-> sub.executeInstruction("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddm"));
+}
+
 private void assertType(Class<?> tipo, Object obj) {
 	assertEquals(tipo,obj.getClass());
 }

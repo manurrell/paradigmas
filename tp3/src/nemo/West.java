@@ -7,7 +7,6 @@ public class West extends Cardinal {
 	public Cardinal turnRight() {
 		return new North();
 	}
-	
 	public Cardinal turnLeft() {
 		return new South();
 	}

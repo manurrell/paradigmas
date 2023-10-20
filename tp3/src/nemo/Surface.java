@@ -6,7 +6,6 @@ public class Surface extends Estados {
 	private int depth=0;
 	public void release() {
 	}
-
 	public ArrayList<Estados> up(ArrayList<Estados> list) {	
 		return list;
 	}

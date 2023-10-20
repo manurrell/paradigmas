@@ -1,11 +1,10 @@
 package nemo;
 
-public class IUp extends Instruction {
-
+public class Comando_m extends Instruction {	
+	private int key = (int) 'm';
 	public void execute(Nemo nemo) {
-		nemo.up();
+		nemo.release();
 	}
-	private int key = 117;
 	public boolean applies(int c) {
 		return key ==c;
 	}

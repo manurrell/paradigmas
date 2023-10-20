@@ -9,11 +9,10 @@ public class Nemo {
 	private ArrayList<Instruction> instruction_list; 
 	private Cardinal aim;
 	
-	
 	public Nemo(int x,int y,Cardinal aim){
 		cords=new Coordinates(x,y);
 		this.aim=aim;
-		instruction_list=new ArrayList<>(Arrays.asList(new IUp(),new IRight(), new ILeft(), new IForward(), new IDescend(), new IRelease()));
+		instruction_list=new ArrayList<>(Arrays.asList(new Comando_u(),new Comando_r(), new Comando_l(), new Comando_f(), new Comando_d(), new Comando_m()));
 	}
 	public void moveFoward() {
 		aim.move(cords);
@@ -25,7 +24,6 @@ public class Nemo {
 		commandos.chars().forEach(comando -> instruction_list.stream()
 				.filter(instructions -> instructions.applies(comando))
 				.collect(Collectors.toList()).get(0).execute(this));
-		
 	}
 	public Cardinal getAim() {
 		return aim;
@@ -41,7 +39,6 @@ public class Nemo {
 	}
 	public void turnLeft() {
 		aim=aim.turnLeft();
-		
 	}
 	public void descend() {
 		state_list=state_list.get(state_list.size()-1).down(state_list);

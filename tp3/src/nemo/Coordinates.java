@@ -22,7 +22,6 @@ public class Coordinates {
 		y+=1;
 		return this;
 	}
-
 	public int getX() {
 		return x;
 	}
