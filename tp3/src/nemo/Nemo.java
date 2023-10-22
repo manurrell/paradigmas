@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class Nemo {
 	private Coordinates cords;
-	private ArrayList<Estados> state_list= new ArrayList<>(Arrays.asList(new Surface()));
+	private ArrayList<Estados> state_list= new ArrayList<>(Arrays.asList(new SafeSurface()));
 	private Cardinal aim;
 	
 	public Nemo(int x,int y,Cardinal aim){

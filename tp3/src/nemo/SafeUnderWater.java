@@ -2,7 +2,7 @@ package nemo;
 
 import java.util.ArrayList;
 
-public class NotInDanger extends Estados {
+public class SafeUnderWater extends Estados {
 	private int depth=-1;
 	public void release() {
 	}

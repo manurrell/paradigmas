@@ -1,9 +1,9 @@
 package nemo;
 
-public class Comando_u extends Instruction {
-	private int key = (int) 'u';
+public class ComandoM extends Instruction {	
+	private int key = (int) 'm';
 	public void execute(Nemo nemo) {
-		nemo.up();
+		nemo.release();
 	}
 	public boolean applies(int c) {
 		return key ==c;
