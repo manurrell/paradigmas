@@ -23,7 +23,7 @@ public class AgendaTest {
 	assertTrue(a.IsHoliday("2007-12-03"));
 	}
 
-@Test void test03NewAgenda() {
+@Test void test03NewAgendaDoesNotHaveACertainHoliday() {
 	Agenda a = new Agenda();
 	a.add("2007-12-03");
 	assertFalse(a.IsHoliday("2008-12-03"));	
@@ -40,16 +40,21 @@ public class AgendaTest {
 	assertTrue(a.IsHoliday("2023-10-23"));
 	}
 
-@Test void test05NewAgendaWithPeriodicHoliday() {
+@Test void test06NewAgendaWithPeriodicHoliday_() {
 	Agenda a = new Agenda();
 	a.add("2024-01-02","2024-01-29");
 	assertTrue(a.IsHoliday("2024-01-05"));
 	}
 
-@Test void test06NewAgendaWithPeriodicHoliday() {
+@Test void test07NewAgendaWithPeriodicHoliday_() {
 	Agenda a = new Agenda();
 	a.add("2024-01-02","2024-01-29");
 	assertFalse(a.IsHoliday("2024-01-30"));
+	}
+@Test void test0jbkj7NewAgendaWithPeriodicHoliday_() {
+	Agenda a = new Agenda();
+	a.add("2024-01-02","2024-01-29");
+	assertTrue(a.IsHoliday("2024-01-29"));
 	}
 
 }

@@ -6,35 +6,21 @@ import java.util.stream.Collectors;
 import java.time.DayOfWeek;
 
 public class Agenda {
-	public ArrayList<LocalDate> feriadosPuntuales=new ArrayList();
-	private ArrayList<DayOfWeek> feriadosSemanales=new ArrayList();
-	private ArrayList<Periodo> feriadosPeriodicos=new ArrayList();
-	
+	private ArrayList<Feriado> holidays=new ArrayList();
 	public static boolean isEmpty() {
 		return true;
 	}
-	
 	public void add(String fecha) {
-		feriadosPuntuales.add(LocalDate.parse(fecha));
+		holidays.add(new Puntual(LocalDate.parse(fecha)));
 	}
-	
 	public void add(int dia) {
-		feriadosSemanales.add(DayOfWeek.of(dia));
+		holidays.add(new Semanal(dia));
 	}
-	
 	public void add(String fecha1,String fecha2) {
-		feriadosPeriodicos.add(new Periodo(LocalDate.parse(fecha1),LocalDate.parse(fecha2)));
+		holidays.add(new Periodico(LocalDate.parse(fecha1),LocalDate.parse(fecha2)));
 	}
-
 	public boolean IsHoliday(String string) {
 		LocalDate f = LocalDate.parse(string);
-		ArrayList<Boolean> chequeando = new ArrayList();
-		chequeando.add(feriadosSemanales.contains(f.getDayOfWeek()));
-		chequeando.add(feriadosPuntuales.stream().anyMatch(feriado -> feriado.equals(f)));
-		chequeando.add(feriadosPeriodicos.stream().anyMatch(period -> period.isInBetween(f)));
-		return chequeando.contains(true);
-		
-
+		return holidays.stream().anyMatch(feriado -> feriado.has(f));
 	}
-
 }
