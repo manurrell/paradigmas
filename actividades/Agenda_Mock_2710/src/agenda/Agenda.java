@@ -30,8 +30,8 @@ public class Agenda {
 		LocalDate f = LocalDate.parse(string);
 		ArrayList<Boolean> chequeando = new ArrayList();
 		chequeando.add(feriadosSemanales.contains(f.getDayOfWeek()));
-		chequeando.add(!feriadosPuntuales.stream().filter(feriado -> feriado.equals(f)).collect(Collectors.toList()).isEmpty());
-		chequeando.add(	!feriadosPeriodicos.stream().filter(period -> period.isInBetween(f)).collect(Collectors.toList()).isEmpty());
+		chequeando.add(feriadosPuntuales.stream().anyMatch(feriado -> feriado.equals(f)));
+		chequeando.add(feriadosPeriodicos.stream().anyMatch(period -> period.isInBetween(f)));
 		return chequeando.contains(true);
 		
 
