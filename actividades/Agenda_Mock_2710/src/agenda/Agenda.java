@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 import java.time.DayOfWeek;
 
 public class Agenda {
-	public ArrayList<LocalDate> feriadosPuntuales=new ArrayList<LocalDate>();
-	private ArrayList<DayOfWeek> feriadosSemanales=new ArrayList<DayOfWeek>();
-	private ArrayList<Periodico> feriadosPeriodicos=new ArrayList<>();
+	public ArrayList<LocalDate> feriadosPuntuales=new ArrayList();
+	private ArrayList<DayOfWeek> feriadosSemanales=new ArrayList();
+	private ArrayList<Periodo> feriadosPeriodicos=new ArrayList();
 	
 	public static boolean isEmpty() {
 		return true;
@@ -23,7 +23,7 @@ public class Agenda {
 	}
 	
 	public void add(String fecha1,String fecha2) {
-		feriadosPeriodicos.add(new Periodico(LocalDate.parse(fecha1),LocalDate.parse(fecha2)));
+		feriadosPeriodicos.add(new Periodo(LocalDate.parse(fecha1),LocalDate.parse(fecha2)));
 	}
 
 	public boolean IsHoliday(String string) {
