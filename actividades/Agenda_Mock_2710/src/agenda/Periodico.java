@@ -19,7 +19,7 @@ public class Periodico extends Feriado{
 	}
 	
 	public boolean has(LocalDate fecha) {
-		return ((fecha.isAfter(fInicial) && fecha.isBefore(fFinal))|| fecha==fInicial || fecha==fFinal);
+		return  ((fecha.isAfter(fInicial) && fecha.isBefore(fFinal))|| (fecha.equals(fInicial) || fecha.equals(fFinal)));
 	}
 
 }
