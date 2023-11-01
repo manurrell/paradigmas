@@ -3,12 +3,12 @@ package linea;
 public class CuatroEnLinea {
 	int b;
 	int a;
-	char mode;
+	Mode mode;
 	
 	public CuatroEnLinea(int base, int altura, char modo) {
 		b=base;
 		a=altura;
-		mode=modo;
+		mode=Mode.selectGamemode(modo);
 		
 	}
 
@@ -20,7 +20,7 @@ public class CuatroEnLinea {
 	}
 
 	public boolean finished() {
-		return  true;
+		return false;
 	}
 
 	public void playRedAt(int prompt) {
@@ -31,6 +31,14 @@ public class CuatroEnLinea {
 	public void playBlueAt(int prompt) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public boolean isEmpty() {
+		return true;
+	}
+	
+	public Mode getMode() {
+		return mode;
 	}
 
 }
