@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.time.DayOfWeek;
 
 public class Agenda {
-	private ArrayList<Feriado> holidays=new ArrayList();
+	private ArrayList<Feriado> holidays=new ArrayList<Feriado>();
 	public static boolean isEmpty() {
 		return true;
 	}
