@@ -22,7 +22,7 @@ public abstract class Mode {
 		return id;
 
 	}
-
+	public abstract boolean checkIfFinished(ArrayList<ArrayList<Object>> tablero);
 
 
 }
