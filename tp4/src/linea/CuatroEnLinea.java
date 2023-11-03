@@ -9,9 +9,9 @@ public class CuatroEnLinea {
 	private Mode mode;
 	private ArrayList<ArrayList<Character>> tablero;
 	
-	public CuatroEnLinea(int base, int altura, char modo) {
-		this.base=base;
-		this.altura=altura;
+	public CuatroEnLinea(int b, int a, char modo) {
+		base=b;
+		altura=a;
 //		for (int i=0;i<base;i++ ) {
 //			tablero.add(new ArrayList<Character>());
 //		}
@@ -33,7 +33,7 @@ public class CuatroEnLinea {
 	}
 
 	public boolean finished() {
-		return false;
+		return mode.checkIfRedWon(this) || mode.checkIfBlueWon(this);
 	}
 
 	public void playRedAt(int prompt) {
@@ -65,6 +65,14 @@ public class CuatroEnLinea {
 	}
 	public Mode getMode() {
 		return mode;
+	}
+
+	public ArrayList<ArrayList<Character>> getBoard() {
+		return tablero;
+	}
+
+	public int getHeight() {
+		return altura;
 	}
 
 }

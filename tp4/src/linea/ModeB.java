@@ -8,7 +8,14 @@ public class ModeB extends Mode{
 	}
 
 	
-	public boolean checkIfFinished(ArrayList<ArrayList<Character>> tablero) {
+	public boolean checkIfBlueWon(CuatroEnLinea tablero) {
+		
+		return false;
+	}
+
+
+	@Override
+	public boolean checkIfRedWon(CuatroEnLinea tablero) {
 		// TODO Auto-generated method stub
 		return false;
 	}

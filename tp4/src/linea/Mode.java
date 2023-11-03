@@ -22,11 +22,11 @@ public abstract class Mode {
 		return id;
 
 	}
-	protected boolean verifyVertical(char player, ArrayList<ArrayList<Character>> tablero){
-		int counter;
-		for (int i=0;i<tablero.size();i++ ) {
+	protected boolean verifyVertical(char player, CuatroEnLinea juego){
+		int counter=0;
+		for (int i=0;i<juego.getBoardSize();i++ ) {
 			counter = 0;
-			ArrayList<Character> column = tablero.get(i);
+			ArrayList<Character> column = juego.getBoard().get(i);
 			for (int a=0; a<column.size(); a++) {
 				if (counter==4) {
 					return true;
@@ -36,19 +36,32 @@ public abstract class Mode {
 				}else {
 					counter=0;
 				}
-				
 			}
-			
+		}
+		return false;
+	}
+	protected boolean verifyHorizontal(char player, CuatroEnLinea juego){
+		int counter;
+		for(int i=0 ; i<juego.getHeight(); i++) {
+			counter=0;
+			for (int col=0; col<juego.getBoardSize();col++) {
+				if (counter==4) {
+					return true;
+				}else if(juego.getBoard().get(col).size()-1>=i) {
+					if(juego.getBoard().get(col).get(i)==player) {
+						counter++;
+					}else {
+						counter=0;
+					}
+				}else {
+					counter=0;
+				}
+			}
 		}
 		return false;
 		
 	}
-	protected boolean verifyHorizontal(char player, ArrayList<ArrayList<Character>> tablero){
-		//NECEITA ACCSESO A ALTURA DE LA LISTA
-		return false;
-		
-	}
-	public abstract boolean checkIfFinished(ArrayList<ArrayList<Character>> tablero);
-
+	public abstract boolean checkIfBlueWon(CuatroEnLinea tablero);
+	public abstract boolean checkIfRedWon(CuatroEnLinea tablero);
 
 }

@@ -7,8 +7,15 @@ public class ModeC extends Mode {
 		id='C';
 	}
 
+
 	@Override
-	public boolean checkIfFinished(ArrayList<ArrayList<Character>> tablero) {
+	public boolean checkIfBlueWon(CuatroEnLinea tablero) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkIfRedWon(CuatroEnLinea tablero) {
 		// TODO Auto-generated method stub
 		return false;
 	}

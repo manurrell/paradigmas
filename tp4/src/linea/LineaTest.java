@@ -28,6 +28,26 @@ public class LineaTest {
 		assertTrue(a.isDraw());
 	}
 	
+	@Test void modalidadAChequeoVerifcal() {
+		CuatroEnLinea a = new CuatroEnLinea(5,5,'A');
+		a.playRedAt(1);
+		a.playRedAt(1);
+		a.playRedAt(1);
+		a.playRedAt(1);
+		a.playRedAt(1);
+		assertTrue(a.finished());
+	}
+	@Test void modalidadAChequeoHorizontal() {
+		CuatroEnLinea a = new CuatroEnLinea(5,5,'A');
+		a.playRedAt(1);
+		a.playRedAt(2);
+		a.playRedAt(3);
+		a.playRedAt(4);
+		a.playRedAt(1);
+		assertTrue(a.finished());
+	}
+	
+	
 	
 	
 }
