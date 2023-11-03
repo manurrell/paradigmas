@@ -1,22 +1,35 @@
 package linea;
 
+import java.util.ArrayList;
+import java.util.stream.IntStream;
+
 public class CuatroEnLinea {
-	int b;
-	int a;
-	Mode mode;
+	private int base;
+	private int altura;
+	private Mode mode;
+	private ArrayList<ArrayList<Character>> tablero;
 	
 	public CuatroEnLinea(int base, int altura, char modo) {
-		b=base;
-		a=altura;
+		this.base=base;
+		this.altura=altura;
+//		for (int i=0;i<base;i++ ) {
+//			tablero.add(new ArrayList<Character>());
+//		}
+		tablero = IntStream.range(0, base)
+		        .collect(ArrayList::new, (list, i) -> list.add(new ArrayList<Character>()), ArrayList::addAll);
+
 		mode=Mode.selectGamemode(modo);
 		
 	}
 
 	public char[] show() {
-		String strong = "_ _ _ _ _ _";
+		String strong = "|_________|";
 		char[] caracteres = strong.toCharArray(); 
 		System.out.println(caracteres);
 		return caracteres;
+	}
+	public int getBoardSize() {
+		return tablero.size();
 	}
 
 	public boolean finished() {
@@ -24,19 +37,32 @@ public class CuatroEnLinea {
 	}
 
 	public void playRedAt(int prompt) {
-		// TODO Auto-generated method stub
+		if (tablero.get(prompt-1).size()< altura) {
+			tablero.get(prompt-1).add('R');
+		}
+		else {
+			this.playRedAt(Game.intPrompt("Diablos amigo esa columna esta llena, intentalo nuevamente en otra columna"));
+			// CAMBIAR ESTO CUANDO NO TENGAMOS FIACA
+		}
 		
 	}
 
 	public void playBlueAt(int prompt) {
-		// TODO Auto-generated method stub
+		if (tablero.get(prompt-1).size()< altura) {
+			tablero.get(prompt-1).add('B');
+		}
+		else {
+			this.playBlueAt(Game.intPrompt("Diablos amigo esa columna esta llena, intentalo nuevamente en otra columna"));
+			// CAMBIAR ESTO CUANDO NO TENGAMOS FIACA
+		}
 		
 	}
-
 	public boolean isEmpty() {
 		return true;
 	}
-	
+	public boolean isDraw() {
+		return tablero.stream().allMatch(col -> col.size()==altura);
+	}
 	public Mode getMode() {
 		return mode;
 	}
