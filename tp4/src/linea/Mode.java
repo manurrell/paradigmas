@@ -24,15 +24,14 @@ public abstract class Mode {
 	}
 	protected boolean verifyVertical(char player, CuatroEnLinea juego){
 		int counter=0;
-		for (int i=0;i<juego.getBoardSize();i++ ) {
+		for (int i=0;i<juego.getBase();i++ ) {
 			counter = 0;
 			ArrayList<Character> column = juego.getBoard().get(i);
 			for (int a=0; a<column.size(); a++) {
-				if (counter==4) {
-					return true;
-					
-				}else if(column.get(a)==player) {
+				if(column.get(a)==player) {
 					counter++;
+					if (counter==4) {
+						return true;}
 				}else {
 					counter=0;
 				}
@@ -44,12 +43,12 @@ public abstract class Mode {
 		int counter;
 		for(int i=0 ; i<juego.getHeight(); i++) {
 			counter=0;
-			for (int col=0; col<juego.getBoardSize();col++) {
-				if (counter==4) {
-					return true;
-				}else if(juego.getBoard().get(col).size()-1>=i) {
+			for (int col=0; col<juego.getBase();col++) {
+				 if(juego.getBoard().get(col).size()-1>=i) {
 					if(juego.getBoard().get(col).get(i)==player) {
 						counter++;
+						if (counter==4) {
+							return true;}
 					}else {
 						counter=0;
 					}
@@ -59,8 +58,50 @@ public abstract class Mode {
 			}
 		}
 		return false;
+	
 		
 	}
+	
+	protected boolean checkDiagonalRight(char player, CuatroEnLinea juego, int startingX, int startingY) {
+		int counter=0;
+		int j = startingY;
+		for (int i=startingX; i<=juego.getHeight()-1; i++ ) {
+			if ((juego.getBoard().get(i).size()-1>=j) && (juego.getBase()-1>=i)) {
+				if (juego.getBoard().get(i).get(j)==player) {
+					counter++;
+					if (counter==4) {
+						return true;    }
+				}
+				else {counter=0;}
+			}
+			else {counter=0;}
+			j++;
+		}
+		return false;
+		
+	}
+	
+	protected boolean checkDiagonalLeft(char player, CuatroEnLinea juego, int startingX, int startingY) {
+		int counter=0;
+		int j = startingY;
+		for (int x=startingX; x>=0; x-- ) {
+			if ((juego.getBoard().get(x).size()-1>=j) && (juego.getBase()-1>=x)) {
+				if (juego.getBoard().get(x).get(j)==player) {
+					counter++;
+					if (counter==4) {
+						return true;    }
+				}
+				else {counter=0;}
+			}
+			else {counter=0;}
+			j++;
+		}
+		return false;
+	}
+	
+	
+	
+	
 	public abstract boolean checkIfBlueWon(CuatroEnLinea tablero);
 	public abstract boolean checkIfRedWon(CuatroEnLinea tablero);
 

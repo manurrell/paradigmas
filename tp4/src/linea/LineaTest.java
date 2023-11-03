@@ -17,7 +17,7 @@ public class LineaTest {
 	
 	@Test void crearlistabien() {
 		CuatroEnLinea a = new CuatroEnLinea(2,1,'A');
-		assertEquals(2,a.getBoardSize());
+		assertEquals(2,a.getBase());
 	}
 	@Test void kasndfkasndkvghn() {
 		assertTrue(new ModeB().applies('B'));
@@ -29,8 +29,7 @@ public class LineaTest {
 	}
 	
 	@Test void modalidadAChequeoVerifcal() {
-		CuatroEnLinea a = new CuatroEnLinea(5,5,'A');
-		a.playRedAt(1);
+		CuatroEnLinea a = new CuatroEnLinea(5,4,'A');
 		a.playRedAt(1);
 		a.playRedAt(1);
 		a.playRedAt(1);
@@ -45,6 +44,48 @@ public class LineaTest {
 		a.playRedAt(4);
 		a.playRedAt(1);
 		assertTrue(a.finished());
+	}
+	
+	@Test void modalidadBChequeoDiagonal() {
+		CuatroEnLinea a = new CuatroEnLinea(5,5,'B');
+		a.playRedAt(1);
+		a.playRedAt(2);
+		a.playRedAt(2);
+		a.playRedAt(3);
+		a.playRedAt(3);
+		a.playRedAt(3);
+		a.playRedAt(4);
+		a.playRedAt(4);
+		a.playRedAt(4);
+		a.playRedAt(4);
+		a.playBlueAt(1);
+		a.playBlueAt(2);
+		a.playBlueAt(3);
+		a.playBlueAt(4);
+		
+		
+		assertTrue(a.finished());
+	}
+	@Test void modalidadBChequeoDiagrrrronal() {
+		CuatroEnLinea a = new CuatroEnLinea(4,4,'B');
+		a.playRedAt(2);
+		a.playRedAt(3);
+		a.playRedAt(3);
+		a.playRedAt(4);
+		a.playRedAt(4);
+		a.playRedAt(4);
+		a.playBlueAt(1);
+		a.playBlueAt(2);
+		a.playBlueAt(3);
+		a.playBlueAt(4);
+		
+		
+		assertTrue(a.finished());
+	}
+	
+	@Test void modalidadCChequeoTodo() {
+		
+		
 	}
 	
 	

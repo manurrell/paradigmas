@@ -28,7 +28,7 @@ public class CuatroEnLinea {
 		System.out.println(caracteres);
 		return caracteres;
 	}
-	public int getBoardSize() {
+	public int getBase() {
 		return tablero.size();
 	}
 
