@@ -22,6 +22,29 @@ public abstract class Mode {
 		return id;
 
 	}
+	protected boolean checkVerticallyAndHorizontally(char player, CuatroEnLinea tablero) {
+		ArrayList<Boolean> verify_list= new ArrayList<>();
+		verify_list.add(verifyVertical(player, tablero));
+		verify_list.add(verifyHorizontal(player, tablero));
+		return verify_list.stream().anyMatch(b -> b);		//EMILIO
+	}
+	
+	
+	protected boolean checkDiagonally(char player, CuatroEnLinea juego) {
+		ArrayList<Boolean> chequeos = new ArrayList<>();
+		for (int i =1; i<=juego.getHeight(); i++) {
+			chequeos.add(checkDiagonalRight(player,juego, 0,juego.getHeight()-i));
+			chequeos.add(checkDiagonalLeft(player,juego, juego.getBase()-1,juego.getHeight()-i));
+		}
+		for (int i =1; i<juego.getBase(); i++) {
+			chequeos.add(checkDiagonalRight(player,juego, i,0));
+			chequeos.add(checkDiagonalLeft(player,juego, juego.getBase()-1-i,0));
+		}
+
+		return (chequeos.stream().anyMatch(b->b));
+	}
+	
+	
 	protected boolean verifyVertical(char player, CuatroEnLinea juego){
 		int counter=0;
 		for (int i=0;i<juego.getBase();i++ ) {
@@ -65,8 +88,8 @@ public abstract class Mode {
 	protected boolean checkDiagonalRight(char player, CuatroEnLinea juego, int startingX, int startingY) {
 		int counter=0;
 		int j = startingY;
-		for (int i=startingX; i<=juego.getHeight()-1; i++ ) {
-			if ((juego.getBoard().get(i).size()-1>=j) && (juego.getBase()-1>=i)) {
+		for (int i=startingX; i<=juego.getBase()-1; i++ ) {
+			if ((juego.getBoard().get(i).size()-1>=j)) {
 				if (juego.getBoard().get(i).get(j)==player) {
 					counter++;
 					if (counter==4) {
@@ -85,7 +108,7 @@ public abstract class Mode {
 		int counter=0;
 		int j = startingY;
 		for (int x=startingX; x>=0; x-- ) {
-			if ((juego.getBoard().get(x).size()-1>=j) && (juego.getBase()-1>=x)) {
+			if ((juego.getBoard().get(x).size()-1>=j)) {
 				if (juego.getBoard().get(x).get(j)==player) {
 					counter++;
 					if (counter==4) {

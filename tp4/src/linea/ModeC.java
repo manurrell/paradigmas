@@ -8,15 +8,11 @@ public class ModeC extends Mode {
 	}
 
 
-	@Override
 	public boolean checkIfBlueWon(CuatroEnLinea tablero) {
-		// TODO Auto-generated method stub
-		return false;
+		return checkVerticallyAndHorizontally('B', tablero) || checkDiagonally('B', tablero);
 	}
 
-	@Override
 	public boolean checkIfRedWon(CuatroEnLinea tablero) {
-		// TODO Auto-generated method stub
-		return false;
+		return checkVerticallyAndHorizontally('R', tablero) || checkDiagonally('R', tablero);
 	}
 }
