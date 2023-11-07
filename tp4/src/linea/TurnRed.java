@@ -3,18 +3,16 @@ package linea;
 public class TurnRed extends State {
 
 
-	public boolean canRedPlay() {
-		return true;
+
+	public void canBluePlay(CuatroEnLinea juego, int prompt) {
 	}
 
-	public boolean canBluePlay() {
-		return false;
-	}
-
-	@Override
 	public boolean isGameFinished() {
-		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public void canRedPlay(CuatroEnLinea juego, int prompt) {
+		juego.addFicha(prompt, 'R');
 	}
 
 }

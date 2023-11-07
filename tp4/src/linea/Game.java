@@ -12,10 +12,17 @@ public class Game {
     while ( !game.finished() ) {
       game.playRedAt( intPrompt( "Rojas? " ) );
       System.out.println( game.show() );
+      if (game.finished()) {
+    	  System.out.print("gano rojo :)\n");
+      }
       if ( !game.finished() ) {
         game.playBlueAt( intPrompt( "Azules? " ) );
         System.out.println( game.show() );
+        if (game.finished()) {
+      	  System.out.print("gano azul :)\n");
+        }
       }
+      
     }
   }
   

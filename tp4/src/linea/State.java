@@ -2,8 +2,8 @@ package linea;
 
 public abstract class State {
 
-	public abstract boolean canRedPlay();
-	public abstract boolean canBluePlay();
+	public abstract void canRedPlay(CuatroEnLinea juego, int prompt);
+	public abstract void canBluePlay(CuatroEnLinea juego, int prompt);
 	public abstract boolean isGameFinished();
 	
 

@@ -44,38 +44,25 @@ public class CuatroEnLinea {
 		return estado.isGameFinished();
 	}
 	
-
-	public void playRedAt(int prompt) {
-		if (estado.canRedPlay()) {
-		if (tablero.get(prompt-1).size()< altura) {
-			tablero.get(prompt-1).add('R');
-			estado= new TurnBlue();
-			checkIfFinished();
-			
+	public void addFicha(int pos, char player) {
+		if (tablero.get(pos-1).size()< altura) {
+			tablero.get(pos-1).add(player);
 		}
 		else {
 			this.playRedAt(Game.intPrompt("Diablos amigo esa columna esta llena, intentalo nuevamente en otra columna"));
 			// CAMBIAR ESTO CUANDO NO TENGAMOS FIACA
 		}
-		}
-		
+	}
+	public void playRedAt(int prompt) {
+		estado.canRedPlay(this,prompt);
+		estado= new TurnBlue();
+		checkIfFinished();
 	}
 
 	public void playBlueAt(int prompt) {
-		if (estado.canBluePlay()) {
-		if (tablero.get(prompt-1).size()< altura) {
-			tablero.get(prompt-1).add('B');
-			estado= new TurnRed();
-			checkIfFinished();
-		}
-		else {
-			this.playBlueAt(Game.intPrompt("Diablos amigo esa columna esta llena, intentalo nuevamente en otra columna"));
-			// CAMBIAR ESTO CUANDO NO TENGAMOS FIACA
-		}
-		}
-	}
-	public boolean isEmpty() {
-		return true;
+		estado.canBluePlay(this, prompt);
+		estado= new TurnRed();
+		checkIfFinished();
 	}
 	private boolean isDraw() {
 		return tablero.stream().allMatch(col -> col.size()==altura);

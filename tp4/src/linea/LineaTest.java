@@ -7,11 +7,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class LineaTest {
-
-	@Test void NewCuatroEnLineaIsEmpty() {
-		assertTrue( new CuatroEnLinea(1,1,'A').isEmpty());
-	}
-	
 	@Test void ModeisMode() {
 		assertTrue(new CuatroEnLinea(1,2,'A').getMode().equals(new ModeA()));
 	}
@@ -45,7 +40,102 @@ public class LineaTest {
 		a.playBlueAt(2);
 		assertTrue(a.finished());
 		}
+	@Test void vertical() {
+		CuatroEnLinea a = new CuatroEnLinea(4,4,'A');
+		a.playRedAt(1);
+		a.playBlueAt(2);
+		a.playRedAt(1);
+		a.playBlueAt(2);
+		a.playRedAt(1);
+		a.playBlueAt(2);
+		a.playRedAt(1);
+		assertTrue(a.finished());
+	}
+	@Test void horizontal() {
+		CuatroEnLinea a = new CuatroEnLinea(4,4,'A');
+		a.playRedAt(1);
+		a.playBlueAt(1);
+		a.playRedAt(2);
+		a.playBlueAt(2);
+		a.playRedAt(3);
+		a.playBlueAt(3);
+		a.playRedAt(4);
+		assertTrue(a.finished());
+	}
+	@Test void horizontalInterrumpido() {
+		CuatroEnLinea a = new CuatroEnLinea(4,4,'A');
+		a.playRedAt(1);
+		a.playBlueAt(1);
+		a.playRedAt(2);
+		a.playBlueAt(3);
+		a.playRedAt(3);
+		a.playBlueAt(3);
+		a.playRedAt(4);
+		assertFalse(a.finished());
+	}
 
+	@Test void diagonalR() {
+		CuatroEnLinea a = new CuatroEnLinea(6,6,'B');
+		a.playRedAt(1);
+		a.playBlueAt(2);
+		a.playRedAt(2);
+		a.playBlueAt(3);
+		a.playRedAt(3);
+		a.playBlueAt(4);
+		a.playRedAt(3);
+		a.playBlueAt(4);
+		a.playRedAt(4);
+		a.playBlueAt(5);
+		a.playRedAt(4);
+		assertTrue(a.finished());
+		
+	}
+	@Test void diagonalRInterrumpido() {
+		CuatroEnLinea a = new CuatroEnLinea(6,6,'B');
+		a.playRedAt(1);
+		a.playBlueAt(2);
+		a.playRedAt(2);
+		a.playBlueAt(3);
+		a.playRedAt(3);
+		a.playBlueAt(3);
+		a.playRedAt(3);
+		a.playBlueAt(4);
+		a.playRedAt(3);
+		a.playBlueAt(4);
+		a.playRedAt(4);
+		a.playBlueAt(5);
+		a.playRedAt(4);
+		assertFalse(a.finished());
+	}
+	
+	@Test void diagonalL() {
+		CuatroEnLinea a = new CuatroEnLinea(6,6,'B');
+		a.playRedAt(6);
+		a.playBlueAt(5);
+		a.playRedAt(5);
+		a.playBlueAt(4);
+		a.playRedAt(4);
+		a.playBlueAt(3);
+		a.playRedAt(4);
+		a.playBlueAt(3);
+		a.playRedAt(3);
+		a.playBlueAt(2);
+		a.playRedAt(3);
+		assertTrue(a.finished());
+		
+	}
+	@Test void verticalNoContinuo() {
+		CuatroEnLinea a = new CuatroEnLinea(6,6,'A');
+		a.playRedAt(1);
+		a.playBlueAt(2);
+		a.playRedAt(1);
+		a.playBlueAt(1);
+		a.playRedAt(1);
+		a.playBlueAt(2);
+		a.playRedAt(1);
+		assertFalse(a.finished());
+		
+	}
 	
 	
 	
