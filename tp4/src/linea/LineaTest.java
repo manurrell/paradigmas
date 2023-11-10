@@ -57,6 +57,31 @@ public class LineaTest {
 
 	}
 
+	@Test
+	void ErrorIsThrownWhenTryingColumnThatIsFull() {
+		CuatroEnLinea a = new CuatroEnLinea(2, 2, 'A');
+		a.playRedAt(1);
+		a.playBlueAt(1);
+		assertThrowsLike("Esta llena la columna  hermano", () -> a.playRedAt(1));
+
+	}
+
+//	@Test void cantKeepPlayingAfterSomeonesWon() {
+//		CuatroEnLinea a = redAchievesVertical('A');
+//		a.playBlueAt(4);
+//		a.playBlueAt(4);
+//		a.playBlueAt(4);
+//		a.playBlueAt(4);
+//		assertEquals(a.getFinalMsg(),"Gano Rojo :)");
+//
+//	}
+
+
+
+
+
+
+
 //	@Test
 //	void cantPlayAfterSomeoneHasWon() {
 //		CuatroEnLinea a = redAchievesVertical('A');
@@ -94,14 +119,7 @@ public class LineaTest {
 
 	@Test
 	void ModoADemo_VerticalWin() {
-		CuatroEnLinea a = new CuatroEnLinea(4, 4, 'A');
-		a.playRedAt(1);
-		a.playBlueAt(2);
-		a.playRedAt(1);
-		a.playBlueAt(2);
-		a.playRedAt(1);
-		a.playBlueAt(2);
-		a.playRedAt(1);
+		CuatroEnLinea a = redAchievesVertical('A');
 		assertTrue(a.finished());
 		assertEquals(a.getFinalMsg(), "Gano Rojo :)");
 	}
