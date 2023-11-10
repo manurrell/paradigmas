@@ -15,4 +15,8 @@ public class TurnRed extends State {
 		juego.addFicha(prompt, 'R');
 	}
 
+	public String getMsg() {
+		return "Gano Azul :)";
+	}
+
 }

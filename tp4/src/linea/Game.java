@@ -13,13 +13,13 @@ public class Game {
       game.playRedAt( intPrompt( "Rojas? " ) );
       System.out.println( game.show() );
       if (game.finished()) {
-    	  System.out.print("gano rojo :)\n");
+    	  System.out.print(game.getFinalMsg());
       }
       if ( !game.finished() ) {
         game.playBlueAt( intPrompt( "Azules? " ) );
         System.out.println( game.show() );
         if (game.finished()) {
-      	  System.out.print("gano azul :)\n");
+      	  System.out.print(game.getFinalMsg());
         }
       }
       

@@ -12,4 +12,8 @@ public class TurnBlue extends State{
 		return false;
 	}
 
+	public String getMsg() {
+		return "Gano Rojo :)";
+	}
+
 }

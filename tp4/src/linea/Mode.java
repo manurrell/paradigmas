@@ -2,6 +2,7 @@ package linea;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -10,7 +11,12 @@ public abstract class Mode {
 	private static ArrayList<Mode> gamemodes = new ArrayList<>(Arrays.asList(new ModeA(), new ModeB(), new ModeC()));
 
 	public static Mode selectGamemode(char a) {
-		return gamemodes.stream().filter(modo -> modo.applies(a)).collect(Collectors.toList()).get(0);
+		List<Mode> gamemode = gamemodes.stream().filter(modo -> modo.applies(a)).collect(Collectors.toList());
+		if (gamemode.size()!=0) {
+			
+			return gamemode.get(0);
+		} 
+		throw new Error("El modo seleccionado es invalido");
 	}
 	public boolean applies(char a) {
 		return id==a;
@@ -112,7 +118,7 @@ public abstract class Mode {
 	protected boolean verifyHorizontal(char player, CuatroEnLinea juego) {
 	    return IntStream.range(0, juego.getHeight())
 	        .anyMatch(i -> {
-	            int counter = 0;
+	        	int counter = 0;
 	            for (int col = 0; col < juego.getBase(); col++) {
 	                if (juego.getBoard().get(col).size() - 1 >= i) {
 	                    if (juego.getBoard().get(col).get(i) == player) {
@@ -131,7 +137,7 @@ public abstract class Mode {
 	        });
 	}
 
-	
+//	
 	protected boolean checkDiagonalRight(char player, CuatroEnLinea juego, int startingX, int startingY) {
 		int counter=0;
 		int j = startingY;
@@ -150,6 +156,8 @@ public abstract class Mode {
 		return false;
 		
 	}
+
+
 	protected boolean checkDiagonalLeft(char player, CuatroEnLinea juego, int startingX, int startingY) {
 		int counter=0;
 		int j = startingY;
@@ -167,7 +175,6 @@ public abstract class Mode {
 		}
 		return false;
 	}
-	
 	
 	
 	

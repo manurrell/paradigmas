@@ -11,6 +11,9 @@ public class CuatroEnLinea {
 	private State estado;
 	
 	public CuatroEnLinea(int b, int a, char modo) {
+		if (b<=0 || a<=0) {
+			throw new Error ("El tamaño de tablero ingresado es inválido.");
+		}
 		base=b;
 		altura=a;
 		estado=new TurnRed();
@@ -24,19 +27,35 @@ public class CuatroEnLinea {
 		
 	}
 
-	public char[] show() {
-		String strong = "|_________|";
-		char[] caracteres = strong.toCharArray(); 
-		System.out.println(caracteres);
-		return caracteres;
+	public String show() {
+		String row;
+		ArrayList<String> output = new ArrayList<>();
+		for (int fil=altura-1; fil>=0; fil--) {
+			row="|"; 
+			for (int col=0; col<=base-1; col++) {
+				if (tablero.get(col).size()>fil) {
+					row= row +" " + tablero.get(col).get(fil);
+				} else {
+					row = row + " _";
+				}
+			}
+			row= row+ " |";
+			output.add(row);
+			
+			
+		}
+		
+		return String.join("\n", output);
 	}
 	public int getBase() {
 		return tablero.size();
 	}
 
 	public void checkIfFinished() {
-		if (mode.checkIfRedWon(this) || mode.checkIfBlueWon(this) || isDraw()) {
-			estado=new Finished();
+		if (mode.checkIfRedWon(this) || mode.checkIfBlueWon(this) ) {
+			estado= new Finished(estado.getMsg());
+		} else if ( isDraw()) {
+			estado = new Finished("Empate");
 		}
 	}
 	
@@ -49,26 +68,29 @@ public class CuatroEnLinea {
 			tablero.get(pos-1).add(player);
 		}
 		else {
-			this.playRedAt(Game.intPrompt("Diablos amigo esa columna esta llena, intentalo nuevamente en otra columna"));
+			this.playRedAt(Game.intPrompt("Diablos amigo esa columna esta llena, intentalo nuevamente en otra columna."));
 			// CAMBIAR ESTO CUANDO NO TENGAMOS FIACA
 		}
 	}
 	public void playRedAt(int prompt) {
+		if (prompt> base || prompt <=0) {
+			throw new Error ("La columna indicada esta fuera de los parametros establecidos.");
+		}
 		estado.canRedPlay(this,prompt);
 		estado= new TurnBlue();
 		checkIfFinished();
 	}
 
 	public void playBlueAt(int prompt) {
+		if (prompt> base || prompt <=0) {
+			throw new Error ("La columna indicada esta fuera de los parametros establecidos.");}
 		estado.canBluePlay(this, prompt);
 		estado= new TurnRed();
 		checkIfFinished();
+
 	}
 	private boolean isDraw() {
 		return tablero.stream().allMatch(col -> col.size()==altura);
-	}
-	public Mode getMode() {
-		return mode;
 	}
 
 	public ArrayList<ArrayList<Character>> getBoard() {
@@ -77,6 +99,10 @@ public class CuatroEnLinea {
 
 	public int getHeight() {
 		return altura;
+	}
+
+	public String getFinalMsg() {
+		return estado.getMsg();
 	}
 
 }
