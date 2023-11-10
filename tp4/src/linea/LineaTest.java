@@ -10,6 +10,8 @@ import org.junit.jupiter.api.function.Executable;
 
 public class LineaTest {
 
+	
+	
 	@Test
 	void TamañoInvalido() {
 		assertThrowsLike("El tamaño de tablero ingresado es inválido.", () -> new CuatroEnLinea(-1, 3, 'A'));
@@ -130,6 +132,7 @@ public class LineaTest {
 		a.playRedAt(4);
 		assertFalse(a.finished());
 	}
+	
 
 	@Test
 	void ModoADemo_verticalInterrumpidoNoGana() {

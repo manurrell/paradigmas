@@ -68,8 +68,7 @@ public class CuatroEnLinea {
 			tablero.get(pos-1).add(player);
 		}
 		else {
-			this.playRedAt(Game.intPrompt("Diablos amigo esa columna esta llena, intentalo nuevamente en otra columna."));
-			// CAMBIAR ESTO CUANDO NO TENGAMOS FIACA
+			throw new Error("Esta llena la columna  hermano");
 		}
 	}
 	public void playRedAt(int prompt) {
