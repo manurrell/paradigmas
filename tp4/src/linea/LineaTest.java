@@ -29,17 +29,6 @@ public class LineaTest {
 		assertEquals(2, a.getBase());
 	}
 
-//	@Test
-//	void kasndfkasndkvghn() {
-//		assertTrue(new ModeB().applies('B'));
-//	}
-
-//	@Test
-//	void Draw_GameEndsWhenBoardIsFull() {
-//		CuatroEnLinea a = new CuatroEnLinea(1, 1, 'A');
-//		a.playRedAt(1);
-//		assertTrue(a.finished());
-//	}
 
 	@Test
 	void cantPlayRedTwice() {
@@ -62,52 +51,12 @@ public class LineaTest {
 		CuatroEnLinea a = new CuatroEnLinea(2, 2, 'A');
 		a.playRedAt(1);
 		a.playBlueAt(1);
-		assertThrowsLike("Esta llena la columna  hermano", () -> a.playRedAt(1));
+		assertThrowsLike("La columna está llena", () -> a.playRedAt(1));
 
 	}
-
-//	@Test void cantKeepPlayingAfterSomeonesWon() {
-//		CuatroEnLinea a = redAchievesVertical('A');
-//		a.playBlueAt(4);
-//		a.playBlueAt(4);
-//		a.playBlueAt(4);
-//		a.playBlueAt(4);
-//		assertEquals(a.getFinalMsg(),"Gano Rojo :)");
-//
-//	}
-
-
-
-
-
-
-
-//	@Test
-//	void cantPlayAfterSomeoneHasWon() {
-//		CuatroEnLinea a = redAchievesVertical('A');
-//		assertTrue(a.finished());
-//		a.playBlueAt(10);
-//
-//	}
-
-//	@Test
-//	void CanTryAgainAfterTryingColumnThatIsFull() {
-//		CuatroEnLinea a = new CuatroEnLinea(4,4,'A');
-//		a.playRedAt(1);
-//		a.playBlueAt(1);
-//		a.playRedAt(2);
-//		a.playBlueAt(1);
-//		a.playRedAt(3);
-//		a.playBlueAt(1);
-//		a.playRedAt(1);
-//		a.playRedAt(4);
-//		assertTrue(a.finished());
-//	}
-
-
-	////////// Modo A //////////
+	
 	@Test
-	void ModoADemo_Draw() {
+	void Draw_GameFinishesWhenBoardIsFull() {
 		CuatroEnLinea a = new CuatroEnLinea(2, 2, 'A');
 		a.playRedAt(1);
 		a.playBlueAt(1);
@@ -116,6 +65,25 @@ public class LineaTest {
 		assertTrue(a.finished());
 		assertEquals(a.getFinalMsg(), "Empate");
 	}
+
+	@Test void cantKeepPlayingAfterSomeonesWon() {
+		CuatroEnLinea a = redAchievesVertical('A');
+		a.playBlueAt(4);
+		a.playBlueAt(4);
+		a.playBlueAt(4);
+		a.playBlueAt(4);
+		assertEquals(a.getFinalMsg(),"Gano Rojo :)");
+
+	}
+	@Test
+	void cantPlayAfterSomeoneHasWon() {
+		CuatroEnLinea a = redAchievesVertical('A');
+		assertTrue(a.finished());
+		a.playBlueAt(10);
+	}
+
+
+	////////// Modo A //////////
 
 	@Test
 	void ModoADemo_VerticalWin() {

@@ -1,11 +1,13 @@
 package linea;
 
 public class TurnBlue extends State{
-	public void canRedPlay(CuatroEnLinea juego, int prompt) {
+	public State canRedPlay(CuatroEnLinea juego, int prompt) {
+		return this;
 	}
 
-	public void canBluePlay(CuatroEnLinea juego, int prompt) {
+	public State canBluePlay(CuatroEnLinea juego, int prompt) {
 		juego.addFicha(prompt,'B');
+		return new TurnRed();
 	}
 
 	public boolean isGameFinished() {

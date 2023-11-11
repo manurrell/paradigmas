@@ -7,7 +7,7 @@ public class CuatroEnLinea {
 	private int base;
 	private int altura;
 	private Mode mode;
-	private ArrayList<ArrayList<Character>> tablero;
+	private ArrayList<ArrayList<Character>> tablero = new ArrayList<>();
 	private State estado;
 	
 	public CuatroEnLinea(int b, int a, char modo) {
@@ -17,12 +17,7 @@ public class CuatroEnLinea {
 		base=b;
 		altura=a;
 		estado=new TurnRed();
-//		for (int i=0;i<base;i++ ) {
-//			tablero.add(new ArrayList<Character>());
-//		}
-		tablero = IntStream.range(0, base)
-		        .collect(ArrayList::new, (list, i) -> list.add(new ArrayList<Character>()), ArrayList::addAll);
-
+		IntStream.range(0, base).forEach(i -> tablero.add(new ArrayList<Character>()));
 		mode=Mode.selectGamemode(modo);
 		
 	}
@@ -64,27 +59,23 @@ public class CuatroEnLinea {
 	}
 	
 	public void addFicha(int pos, char player) {
+		if (pos> base || pos <=0) {
+			throw new Error ("La columna indicada esta fuera de los parametros establecidos.");
+		}
 		if (tablero.get(pos-1).size()< altura) {
 			tablero.get(pos-1).add(player);
 		}
 		else {
-			throw new Error("Esta llena la columna  hermano");
+			throw new Error("La columna está llena");
 		}
 	}
-	public void playRedAt(int prompt) {
-		if (prompt> base || prompt <=0) {
-			throw new Error ("La columna indicada esta fuera de los parametros establecidos.");
-		}
-		estado.canRedPlay(this,prompt);
-		estado= new TurnBlue();
+	public void playRedAt(int prompt) {		
+		estado= estado.canRedPlay(this,prompt);
 		checkIfFinished();
 	}
 
 	public void playBlueAt(int prompt) {
-		if (prompt> base || prompt <=0) {
-			throw new Error ("La columna indicada esta fuera de los parametros establecidos.");}
-		estado.canBluePlay(this, prompt);
-		estado= new TurnRed();
+		estado= estado.canBluePlay(this, prompt);
 		checkIfFinished();
 
 	}

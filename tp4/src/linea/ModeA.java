@@ -7,13 +7,12 @@ public class ModeA extends Mode {
 		id='A';
 	}
 
-	
 	public boolean checkIfRedWon(CuatroEnLinea tablero) {
-		return checkVerticallyAndHorizontally('R',tablero);					//julio
+		return checkVerticallyAndHorizontally('R',tablero);	
 		
 	}
 	public boolean checkIfBlueWon(CuatroEnLinea tablero) {
-		return checkVerticallyAndHorizontally('B',tablero);					//julio
+		return checkVerticallyAndHorizontally('B',tablero);
 		
 	}
 }

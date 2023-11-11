@@ -60,30 +60,7 @@ public abstract class Mode {
 		return (chequeos.stream().anyMatch(b->b));
 	}
 	
-	
-	protected boolean verifyVertical(char player, CuatroEnLinea juego){
-		return IntStream.range(0, juego.getBase()).anyMatch(i -> {
-			int counter = 0;
-			ArrayList<Character> column = juego.getBoard().get(i);
-			int a = IntStream.range(0, column.size())
-			        .map(m -> column.get(m) == player ? 1 : 0)
-			        .reduce(0, (subtotal, element) -> {
-			            if (element == 1) {
-			                return subtotal + 1;
-			            } else {
-			                return 0;
-			            }
-			        });
 
-			if (a >= 4) {
-			    return true;
-			}
-		
-		return false;
-		
-		
-		});
-	}
 //	protected boolean verifyVertical(char player, CuatroEnLinea juego){
 //		int counter=0;
 //		for (int i=0;i<juego.getBase();i++ ) {
@@ -101,20 +78,20 @@ public abstract class Mode {
 //		}
 //		return false;
 //	}
-//	protected boolean verifyVertical(char player, CuatroEnLinea juego) {	
-//	    for (int i = 0; i < juego.getBase(); i++) {
-//	        int finalI = i;
-//	        long count = IntStream.range(0, juego.getBoard().get(finalI).size())
-//	            .mapToObj(a -> juego.getBoard().get(finalI).get(a))
-//	            .takeWhile(cell -> cell == player)
-//	            .count();
-//	        
-//	        if (count >= 4) {
-//	            return true;
-//	        }
-//	    }
-//	    return false;
-//	} 
+	protected boolean verifyVertical(char player, CuatroEnLinea juego) {	
+	    for (int i = 0; i < juego.getBase(); i++) {
+	        int finalI = i;
+	        long count = IntStream.range(0, juego.getBoard().get(finalI).size())
+	            .mapToObj(a -> juego.getBoard().get(finalI).get(a))
+	            .takeWhile(cell -> cell == player)
+	            .count();
+	        
+	        if (count >= 4) {
+	            return true;
+	        }
+	    }
+	    return false;
+	} 
 	
 	//	protected boolean verifyHorizontal(char player, CuatroEnLinea juego){
 //		int counter;

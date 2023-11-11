@@ -6,10 +6,12 @@ public class Finished extends State{
 		this.msg=msg;
 	}
 	
-	public void canRedPlay(CuatroEnLinea juego, int prompt) {
+	public State canRedPlay(CuatroEnLinea juego, int prompt) {
+		return this;
 	}
 
-	public void canBluePlay(CuatroEnLinea juego, int prompt) {
+	public State canBluePlay(CuatroEnLinea juego, int prompt) {
+		return this;
 	}
 
 	public boolean isGameFinished() {
