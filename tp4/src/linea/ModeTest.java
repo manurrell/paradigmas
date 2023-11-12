@@ -10,14 +10,18 @@ import org.junit.jupiter.api.Test;
 public class ModeTest {
 
 	@Test
-	void ModoADemo_VerticalWin() {
-		CuatroEnLinea a = redAchievesVertical('A');
+	void ModeTest01ModoADemo_VerticalWin() {
+		CuatroEnLinea a = newGame_4x4_redAttainsVertical_inMode('A');
 		assertTrue(a.finished());
 		assertEquals(a.getFinalMsg(), "Gano Rojo :)");
+		assertEquals(a.show(), "| R _ _ _ |\n"
+							 + "| R B _ _ |\n"
+							 + "| R B _ _ |\n"
+							 + "| R B _ _ |");
 	}
 
 	@Test
-	void ModoADemo_HorizontalWin() {
+	void ModeTest02ModoADemo_HorizontalWin() {
 		CuatroEnLinea a = new CuatroEnLinea(4, 4, 'A');
 		a.playRedAt(1);
 		a.playBlueAt(1);
@@ -31,7 +35,7 @@ public class ModeTest {
 	}
 
 	@Test
-	void ModoADemo_HorizontalInterrumpidaNoGana() {
+	void ModeTest03ModoADemo_HorizontalInterrumpidaNoGana() {
 		CuatroEnLinea a = new CuatroEnLinea(4, 4, 'A');
 		a.playRedAt(1);
 		a.playBlueAt(1);
@@ -45,7 +49,7 @@ public class ModeTest {
 	
 
 	@Test
-	void ModoADemo_verticalInterrumpidoNoGana() {
+	void ModeTest04ModoADemo_verticalInterrumpidoNoGana() {
 		CuatroEnLinea a = new CuatroEnLinea(6, 6, 'A');
 		a.playRedAt(1);
 		a.playBlueAt(2);
@@ -60,38 +64,38 @@ public class ModeTest {
 	}
 
 	@Test
-	void ModoADemo_DiagonalRNoGana() {
-		CuatroEnLinea a = redAchievesDiagonalR('A');
+	void ModeTest05ModoADemo_DiagonalRNoGana() {
+		CuatroEnLinea a = newGame_4x4_redAttainsRightOrientedDiagonal_inMode('A');
 		assertFalse(a.finished());
 
 	}
 
 	@Test
-	void ModoADemo_DiagonalLNoGana() {
-		CuatroEnLinea a = redAchievesDiagonalL('A');
+	void ModeTest06ModoADemo_DiagonalLNoGana() {
+		CuatroEnLinea a = newGame_4x4_redAttainsLeftOrientedDiagonal_inMode('A');
 		assertFalse(a.finished());
 
 	}
 
 	
 	@Test
-	void ModoBDemo_diagonalRGana() {
-		CuatroEnLinea a = redAchievesDiagonalR('B');
+	void ModeTest07ModoBDemo_diagonalRGana() {
+		CuatroEnLinea a = newGame_4x4_redAttainsRightOrientedDiagonal_inMode('B');
 		assertTrue(a.finished());
 		assertEquals(a.getFinalMsg(), "Gano Rojo :)");
 
 	}
 
 	@Test
-	void ModoBDemo_diagonalLGana() {
-		CuatroEnLinea a = redAchievesDiagonalL('B');
+	void ModeTest08ModoBDemo_diagonalLGana() {
+		CuatroEnLinea a = newGame_4x4_redAttainsLeftOrientedDiagonal_inMode('B');
 		assertTrue(a.finished());
 		assertEquals(a.getFinalMsg(), "Gano Rojo :)");
 
 	}
 
 	@Test
-	void ModoBDemo_diagonalRInterrumpidoNoGana() {
+	void ModeTest09ModoBDemo_diagonalRInterrumpidoNoGana() {
 		CuatroEnLinea a = new CuatroEnLinea(6, 6, 'B');
 		a.playRedAt(1);
 		a.playBlueAt(2);
@@ -109,7 +113,7 @@ public class ModeTest {
 		assertFalse(a.finished());
 	}
 	@Test
-	void ModoBDemo_diagonalLInterrumpidoNoGana() {
+	void ModeTest10ModoBDemo_diagonalLInterrumpidoNoGana() {
 		CuatroEnLinea a = new CuatroEnLinea(6, 6, 'B');
 		a.playRedAt(6);
 		a.playBlueAt(5);
@@ -129,33 +133,41 @@ public class ModeTest {
 
 	
 	@Test
-	void ModoCDemo_VerticalGana() {
-		CuatroEnLinea a = redAchievesVertical('C');
+	void ModeTest11ModoCDemo_VerticalGana() {
+		CuatroEnLinea a = newGame_4x4_redAttainsVertical_inMode('C');
+		assertTrue(a.finished());
+		assertEquals(a.show(), "| R _ _ _ |\n"
+							 + "| R B _ _ |\n"
+							 + "| R B _ _ |\n"
+							 + "| R B _ _ |");
+		assertEquals(a.getFinalMsg(), "Gano Rojo :)");
+	}
+
+	@Test
+	void ModeTest12ModoCDemo_HorizontalGana() {
+		CuatroEnLinea a = newGame_4x4_redAttainsHorizontal_inMode('C');
 		assertTrue(a.finished());
 		assertEquals(a.getFinalMsg(), "Gano Rojo :)");
 	}
 
 	@Test
-	void ModoCDemo_HorizontalGana() {
-		CuatroEnLinea a = redAchievesHorizontal('C');
+	void ModeTest13ModoCDemo_DiagonalRGana() {
+		CuatroEnLinea a = newGame_4x4_redAttainsRightOrientedDiagonal_inMode('C');
 		assertTrue(a.finished());
 		assertEquals(a.getFinalMsg(), "Gano Rojo :)");
 	}
 
 	@Test
-	void ModoCDemo_DiagonalRGana() {
-		CuatroEnLinea a = redAchievesDiagonalR('C');
+	void ModeTest14ModoCDemo_DiagonalLGana() {
+		CuatroEnLinea a = newGame_4x4_redAttainsLeftOrientedDiagonal_inMode('C');
 		assertTrue(a.finished());
 		assertEquals(a.getFinalMsg(), "Gano Rojo :)");
 	}
-
-	@Test
-	void ModoCDemo_DiagonalLGana() {
-		CuatroEnLinea a = redAchievesDiagonalL('C');
-		assertTrue(a.finished());
-		assertEquals(a.getFinalMsg(), "Gano Rojo :)");
-	}
-	private CuatroEnLinea redAchievesDiagonalR(char m) {
+	
+	
+	
+	
+	private CuatroEnLinea newGame_4x4_redAttainsRightOrientedDiagonal_inMode(char m) {
 		CuatroEnLinea a = new CuatroEnLinea(4,4,m);
 		a.playRedAt(1);
 		a.playBlueAt(2);
@@ -168,11 +180,15 @@ public class ModeTest {
 		a.playRedAt(1);
 		a.playBlueAt(4);
 		a.playRedAt(4);
+		assertEquals(a.show(), "| _ _ _ R |\n"
+							 + "| _ _ R B |\n"
+							 + "| R R R B |\n"
+							 + "| R B B B |");
 		return a;
 	}
 
 
-	private CuatroEnLinea redAchievesDiagonalL(char m) {
+	private CuatroEnLinea newGame_4x4_redAttainsLeftOrientedDiagonal_inMode(char m) {
 		CuatroEnLinea a = new CuatroEnLinea(4,4,m);
 		a.playRedAt(4);
 		a.playBlueAt(3);
@@ -185,10 +201,14 @@ public class ModeTest {
 		a.playRedAt(4);
 		a.playBlueAt(1);
 		a.playRedAt(1);
+		assertEquals(a.show(), "| R _ _ _ |\n"
+							 + "| B R _ _ |\n"
+							 + "| B R R R |\n"
+							 + "| B B B R |");
 		return a;
 	}
 
-	private CuatroEnLinea redAchievesVertical(char m) {
+	private CuatroEnLinea newGame_4x4_redAttainsVertical_inMode(char m) {
 		CuatroEnLinea a = new CuatroEnLinea(4,4,m);
 		a.playRedAt(1);
 		a.playBlueAt(2);
@@ -197,10 +217,14 @@ public class ModeTest {
 		a.playRedAt(1);
 		a.playBlueAt(2);
 		a.playRedAt(1);
+		assertEquals(a.show(), "| R _ _ _ |\n"
+							 + "| R B _ _ |\n"
+							 + "| R B _ _ |\n"
+							 + "| R B _ _ |");
 		return a;
 	}
 
-	private CuatroEnLinea redAchievesHorizontal(char m) {
+	private CuatroEnLinea newGame_4x4_redAttainsHorizontal_inMode(char m) {
 		CuatroEnLinea a = new CuatroEnLinea(4,4,m);
 		a.playRedAt(1);
 		a.playBlueAt(1);
@@ -209,6 +233,10 @@ public class ModeTest {
 		a.playRedAt(3);
 		a.playBlueAt(3);
 		a.playRedAt(4);
+		assertEquals(a.show(), "| _ _ _ _ |\n"
+							 + "| _ _ _ _ |\n"
+							 + "| B B B _ |\n"
+							 + "| R R R R |");
 		return a;
 	}
 

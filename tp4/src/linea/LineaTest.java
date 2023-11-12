@@ -12,7 +12,7 @@ public class LineaTest {
 
 	
 	@Test
-	void newGame00() {
+	void LineaTest01newGame() {
 		CuatroEnLinea a = new CuatroEnLinea(2, 2, 'A');
 		assertEquals(
 				 	 "| _ _ |\n"
@@ -21,12 +21,12 @@ public class LineaTest {
 
 	}
 	@Test
-	void TamañoInvalido() {
+	void LineaTest02tamañoInvalido() {
 		assertThrowsLike("El tamaño de tablero ingresado es inválido.", () -> new CuatroEnLinea(-1, 3, 'A'));
 	}
 
 	@Test
-	void ModoInvalido() {
+	void LineaTest03modoInvalido() {
 		assertThrowsLike("El modo seleccionado es invalido", () -> new CuatroEnLinea(3, 3, 'Z'));
 	}
 
@@ -34,7 +34,7 @@ public class LineaTest {
 
 
 	@Test
-	void cantPlayRedTwice() {
+	void LineaTest04cantPlayRedTwice() {
 		CuatroEnLinea a = new CuatroEnLinea(1, 2, 'A');
 		a.playRedAt(1);
 		a.playRedAt(1);
@@ -46,14 +46,14 @@ public class LineaTest {
 	}
 
 	@Test
-	void ErrorIsThrownAfterTryingOutOfBoundsColumn() {
+	void LineaTest05errorIsThrownAfterTryingOutOfBoundsColumn() {
 		CuatroEnLinea a = new CuatroEnLinea(1, 1, 'A');
 		assertThrowsLike("La columna indicada esta fuera de los parametros establecidos.", () -> a.playRedAt(2));
 
 	}
 
 	@Test
-	void ErrorIsThrownWhenTryingColumnThatIsFull() {
+	void LineaTest06errorIsThrownWhenTryingColumnThatIsFull() {
 		CuatroEnLinea a = new CuatroEnLinea(2, 2, 'A');
 		a.playRedAt(1);
 		a.playBlueAt(1);
@@ -62,7 +62,7 @@ public class LineaTest {
 	}
 	
 	@Test
-	void Draw_GameFinishesWhenBoardIsFull() {
+	void LineaTest07GameEndsAsDrawWhenBoardIsFull() {
 		CuatroEnLinea a = new CuatroEnLinea(2, 2, 'A');
 		a.playRedAt(1);
 		a.playBlueAt(1);
@@ -74,8 +74,13 @@ public class LineaTest {
 		assertEquals(a.getFinalMsg(), "Empate");
 	}
 
-	@Test void cantKeepPlayingAfterSomeonesWon() {
-		CuatroEnLinea a = redAchievesVertical('A');
+	@Test void LineaTest08gameOutcomeIsLockedAfterSomeoneHasWon() {
+		CuatroEnLinea a = newGame_4x4_redAttainsVertical_inMode('A');
+		assertEquals("| R _ _ _ |\n"
+				+ 	 "| R B _ _ |\n"
+				+ 	 "| R B _ _ |\n"
+				+ 	 "| R B _ _ |", a.show());
+		assertEquals(a.getFinalMsg(),"Gano Rojo :)");
 		a.playBlueAt(4);
 		assertEquals("| R _ _ _ |\n"
 				+ 	 "| R B _ _ |\n"
@@ -88,7 +93,7 @@ public class LineaTest {
 	private void assertThrowsLike(String msg, Executable exe) {
 		  assertEquals(msg, assertThrows(Error.class, exe).getMessage());
 	  }
-	private CuatroEnLinea redAchievesVertical(char m) {
+	private CuatroEnLinea newGame_4x4_redAttainsVertical_inMode(char m) {
 		CuatroEnLinea a = new CuatroEnLinea(4,4,m);
 		a.playRedAt(1);
 		a.playBlueAt(2);
