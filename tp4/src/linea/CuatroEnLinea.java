@@ -27,7 +27,7 @@ public class CuatroEnLinea {
 
 	    IntStream.range(0, altura)
 	            .mapToObj(fil -> createRow(fil))
-	            .forEach(s -> output.add(0, s));
+	            .forEach(str -> output.add(0, str));
 
 	    return String.join("\n", output);
 	}
