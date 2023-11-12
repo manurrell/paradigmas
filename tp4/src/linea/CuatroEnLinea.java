@@ -1,6 +1,7 @@
 package linea;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class CuatroEnLinea {
@@ -22,26 +23,51 @@ public class CuatroEnLinea {
 		
 	}
 
+//
+//	public String show() {
+//		String row;
+//		ArrayList<String> output = new ArrayList<>();
+//		for (int fil=altura-1; fil>=0; fil--) {
+//			row="|"; 
+//			for (int col=0; col<=base-1; col++) {
+//				if (tablero.get(col).size()>fil) {
+//					row= row +" " + tablero.get(col).get(fil);
+//				} else {
+//					row = row + " _";
+//				}
+//			}
+//			row= row+ " |";
+//			output.add(row);
+//			
+//			
+//		}
+//		
+//		return String.join("\n", output);
+//	}
+//	
 	public String show() {
-		String row;
-		ArrayList<String> output = new ArrayList<>();
-		for (int fil=altura-1; fil>=0; fil--) {
-			row="|"; 
-			for (int col=0; col<=base-1; col++) {
-				if (tablero.get(col).size()>fil) {
-					row= row +" " + tablero.get(col).get(fil);
-				} else {
-					row = row + " _";
-				}
-			}
-			row= row+ " |";
-			output.add(row);
-			
-			
-		}
-		
-		return String.join("\n", output);
+	    ArrayList<String> output = new ArrayList<>();
+
+	    IntStream.range(0, altura)
+	            .mapToObj(fil -> createRow(fil))
+	            .forEach(s -> output.add(0, s));
+
+	    return String.join("\n", output);
 	}
+
+	private String createRow(int fil) {
+	    return "|" +IntStream.range(0, base)
+	            .mapToObj(col -> {
+	                if (tablero.get(col).size() > fil) {
+	                    return " " + tablero.get(col).get(fil);
+	                } else {
+	                    return " _";
+	                }
+	            })
+	            .collect(Collectors.joining()) + " |";
+	}
+
+	
 	public int getBase() {
 		return tablero.size();
 	}
