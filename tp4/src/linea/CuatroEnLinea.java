@@ -22,29 +22,6 @@ public class CuatroEnLinea {
 		mode=Mode.selectGamemode(modo);
 		
 	}
-
-//
-//	public String show() {
-//		String row;
-//		ArrayList<String> output = new ArrayList<>();
-//		for (int fil=altura-1; fil>=0; fil--) {
-//			row="|"; 
-//			for (int col=0; col<=base-1; col++) {
-//				if (tablero.get(col).size()>fil) {
-//					row= row +" " + tablero.get(col).get(fil);
-//				} else {
-//					row = row + " _";
-//				}
-//			}
-//			row= row+ " |";
-//			output.add(row);
-//			
-//			
-//		}
-//		
-//		return String.join("\n", output);
-//	}
-//	
 	public String show() {
 	    ArrayList<String> output = new ArrayList<>();
 

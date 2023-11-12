@@ -9,7 +9,6 @@ import java.util.stream.IntStream;
 public abstract class Mode {
 	protected char id;
 	private static ArrayList<Mode> gamemodes = new ArrayList<>(Arrays.asList(new ModeA(), new ModeB(), new ModeC()));
-
 	public static Mode selectGamemode(char a) {
 		List<Mode> gamemode = gamemodes.stream().filter(modo -> modo.applies(a)).collect(Collectors.toList());
 		if (gamemode.size()!=0) {
@@ -39,141 +38,82 @@ public abstract class Mode {
 	
 	protected boolean checkDiagonally(char player, CuatroEnLinea juego) {
 		ArrayList<Boolean> chequeos = new ArrayList<>();
-//		for (int i =1; i<=juego.getHeight(); i++) {
-//			chequeos.add(checkDiagonalRight(player,juego, 0,juego.getHeight()-i));
-//			chequeos.add(checkDiagonalLeft(player,juego, juego.getBase()-1,juego.getHeight()-i));
-//		}
 		IntStream.range(1, juego.getHeight() + 1)
 	    .forEach(i -> {
-	        chequeos.add(checkDiagonalRight(player, juego, 0, juego.getHeight() - i));
-	        chequeos.add(checkDiagonalLeft(player, juego, juego.getBase() - 1, juego.getHeight() - i));
+	        chequeos.add(verifyDiagonalRight(player, juego, 0, juego.getHeight() - i));
+	        chequeos.add(verifyDiagonalLeft(player, juego, juego.getBase() - 1, juego.getHeight() - i));
 	    });
-//		for (int i =1; i<juego.getBase(); i++) {
-//			chequeos.add(checkDiagonalRight(player,juego, i,0));
-//			chequeos.add(checkDiagonalLeft(player,juego, juego.getBase()-1-i,0));
-//		}
 		IntStream.range(1, juego.getBase()).forEach(i -> {
-		    chequeos.add(checkDiagonalRight(player, juego, i, 0));
-		    chequeos.add(checkDiagonalLeft(player, juego, juego.getBase() - 1 - i, 0));
+		    chequeos.add(verifyDiagonalRight(player, juego, i, 0));
+		    chequeos.add(verifyDiagonalLeft(player, juego, juego.getBase() - 1 - i, 0));
 		});
 
 		return (chequeos.stream().anyMatch(b->b));
 	}
-	
-
-//	protected boolean verifyVertical(char player, CuatroEnLinea juego){
-//		int counter=0;
-//		for (int i=0;i<juego.getBase();i++ ) {
-//			counter = 0;
-//			ArrayList<Character> column = juego.getBoard().get(i);
-//			for (int a=0; a<column.size(); a++) {
-//				if(column.get(a)==player) {
-//					counter++;
-//					if (counter==4) {
-//						return true;}
-//				}else {
-//					counter=0;
-//				}
-//			}
-//		}
-//		return false;
-//	}
 	protected boolean verifyVertical(char player, CuatroEnLinea juego) {	
-	    for (int i = 0; i < juego.getBase(); i++) {
-	        int finalI = i;
-	        long count = IntStream.range(0, juego.getBoard().get(finalI).size())
-	            .mapToObj(a -> juego.getBoard().get(finalI).get(a))
+		return IntStream.range(0, juego.getBase()).anyMatch(i -> {
+	        long count = IntStream.range(0, juego.getBoard().get(i).size())
+	            .mapToObj(a -> juego.getBoard().get(i).get(a))
 	            .takeWhile(cell -> cell == player)
 	            .count();
 	        
 	        if (count >= 4) {
 	            return true;
+	        }else {
+	        	return false;
 	        }
-	    }
-	    return false;
-	} 
-	
-	//	protected boolean verifyHorizontal(char player, CuatroEnLinea juego){
-//		int counter;
-//		for(int i=0 ; i<juego.getHeight(); i++) {
-//			counter=0;
-//			for (int col=0; col<juego.getBase();col++) {
-//				 if(juego.getBoard().get(col).size()-1>=i) {
-//					if(juego.getBoard().get(col).get(i)==player) {
-//						counter++;
-//						if (counter==4) {
-//							return true;}
-//					}else {
-//						counter=0;
-//					}
-//				}else {
-//					counter=0;
-//				}
-//			}
-//		}
-//		return false;
-//	
-//		
-//	}
-	protected boolean verifyHorizontal(char player, CuatroEnLinea juego) {
-	    return IntStream.range(0, juego.getHeight())
-	        .anyMatch(i -> {
-	        	int counter = 0;
-	            for (int col = 0; col < juego.getBase(); col++) {
-	                if (juego.getBoard().get(col).size() - 1 >= i) {
-	                    if (juego.getBoard().get(col).get(i) == player) {
-	                        counter++;
-	                        if (counter == 4) {
-	                            return true;
-	                        }
-	                    } else {
-	                        counter = 0;
-	                    }
-	                } else {
-	                    counter = 0;
-	                }
-	            }
-	            return false;
-	        });
+	    });
 	}
-
-//	
-	protected boolean checkDiagonalRight(char player, CuatroEnLinea juego, int startingX, int startingY) {
-		int counter=0;
-		int j = startingY;
-		for (int i=startingX; i<=juego.getBase()-1; i++ ) {
-			if ((juego.getBoard().get(i).size()-1>=j)) {
-				if (juego.getBoard().get(i).get(j)==player) {
-					counter++;
-					if (counter==4) {
-						return true;    }
-				}
-				else {counter=0;}
-			}
-			else {counter=0;}
-			j++;
-		}
-		return false;
+	    	protected boolean verifyHorizontal(char player, CuatroEnLinea juego) {
+	    	    return IntStream.range(0, juego.getHeight()).anyMatch(fil -> {
+	    	    	 long count = IntStream.range(0, juego.getBase()).mapToObj(col -> { 
+	    	    		if (juego.getBoard().get(col).size()>fil) {
+	    	    			return juego.getBoard().get(col).get(fil);
+	    	    		} else {
+	    	    			return '-';
+	    	    		}
+	    	    	}).takeWhile(cell -> cell== player).count();
+	    	    	 if (count>=4) {
+	    	    		 return true;
+	    	    	 } else {
+	    	    		 
+	    	    		return false;
+	    	    	 }
+	    	    }); 
+	    	}
+	protected boolean verifyDiagonalRight(char player, CuatroEnLinea juego, int startingX, int startingY) {
+		long count = IntStream.range(startingX, juego.getBase()).mapToObj(col -> {
+			int filaActual= col-startingX+startingY;
+    		if (juego.getBoard().get(col).size()>filaActual) {
+    			return juego.getBoard().get(col).get(filaActual);
+    		} else {
+    			return '-';
+    		}
+		}).takeWhile(cell -> cell==player).count();
 		
+		if (count>=4) {
+			return true;
+		} else {
+			
+			return false;
+		}
 	}
 
-
-	protected boolean checkDiagonalLeft(char player, CuatroEnLinea juego, int startingX, int startingY) {
-		int counter=0;
-		int j = startingY;
-		for (int x=startingX; x>=0; x-- ) {
-			if ((juego.getBoard().get(x).size()-1>=j)) {
-				if (juego.getBoard().get(x).get(j)==player) {
-					counter++;
-					if (counter==4) {
-						return true;    }
-				}
-				else {counter=0;}
-			}
-			else {counter=0;}
-			j++;
+	protected boolean verifyDiagonalLeft(char player, CuatroEnLinea juego, int startingX, int startingY) {
+		long count = IntStream.range(0, startingX+1).mapToObj(i -> {
+			int filaActual= i+startingY;
+			int colActual= startingX-i;
+    		if (juego.getBoard().get(colActual).size()>filaActual) {
+    			return juego.getBoard().get(colActual).get(filaActual);
+    		} else {
+    			return '-';
+    		}
+		}).takeWhile(cell -> cell==player).count();	
+		if (count>=4) {
+			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 	
 	

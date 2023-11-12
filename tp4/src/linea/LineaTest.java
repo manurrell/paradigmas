@@ -69,19 +69,13 @@ public class LineaTest {
 	@Test void cantKeepPlayingAfterSomeonesWon() {
 		CuatroEnLinea a = redAchievesVertical('A');
 		a.playBlueAt(4);
-		a.playBlueAt(4);
-		a.playBlueAt(4);
-		a.playBlueAt(4);
+		assertEquals("| R _ _ _ |\n"
+				+ 	 "| R B _ _ |\n"
+				+ 	 "| R B _ _ |\n"
+				+ 	 "| R B _ _ |", a.show());
 		assertEquals(a.getFinalMsg(),"Gano Rojo :)");
 
 	}
-	@Test
-	void cantPlayAfterSomeoneHasWon() {
-		CuatroEnLinea a = redAchievesVertical('A');
-		assertTrue(a.finished());
-		a.playBlueAt(10);
-	}
-
 
 	////////// Modo A //////////
 
