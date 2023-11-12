@@ -1,7 +1,5 @@
 package linea;
 
-import java.util.ArrayList;
-
 public class ModeB extends Mode{
 	public ModeB() {
 		id='B';
@@ -9,12 +7,12 @@ public class ModeB extends Mode{
 
 	
 	public boolean checkIfBlueWon(CuatroEnLinea juego) {
-		return checkDiagonally('B',juego);
+		return juego.checkDiagonally('B');
 		
 	}
 
 
 	public boolean checkIfRedWon(CuatroEnLinea juego) {
-		return checkDiagonally('R',juego);
+		return juego.checkDiagonally('R');
 	}
 }

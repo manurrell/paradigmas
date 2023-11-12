@@ -23,11 +23,6 @@ public class LineaTest {
 	}
 
 
-	@Test
-	void crearlistabien() {
-		CuatroEnLinea a = new CuatroEnLinea(2, 1, 'A');
-		assertEquals(2, a.getBase());
-	}
 
 
 	@Test

@@ -1,7 +1,5 @@
 package linea;
 
-import java.util.ArrayList;
-
 public class ModeC extends Mode {
 	public ModeC() {
 		id='C';
@@ -9,10 +7,10 @@ public class ModeC extends Mode {
 
 
 	public boolean checkIfBlueWon(CuatroEnLinea tablero) {
-		return checkVerticallyAndHorizontally('B', tablero) || checkDiagonally('B', tablero);
+		return tablero.checkVerticallyAndHorizontally('B') || tablero.checkDiagonally('B');
 	}
 
 	public boolean checkIfRedWon(CuatroEnLinea tablero) {
-		return checkVerticallyAndHorizontally('R', tablero) || checkDiagonally('R', tablero);
+		return tablero.checkVerticallyAndHorizontally('R') || tablero.checkDiagonally('R');
 	}
 }

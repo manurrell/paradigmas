@@ -44,11 +44,6 @@ public class CuatroEnLinea {
 	            .collect(Collectors.joining()) + " |";
 	}
 
-	
-	public int getBase() {
-		return tablero.size();
-	}
-
 	public void checkIfFinished() {
 		if (mode.checkIfRedWon(this) || mode.checkIfBlueWon(this) ) {
 			estado= new Finished(estado.getMsg());
@@ -56,7 +51,6 @@ public class CuatroEnLinea {
 			estado = new Finished("Empate");
 		}
 	}
-	
 	public boolean finished() {
 		return estado.isGameFinished();
 	}
@@ -85,17 +79,101 @@ public class CuatroEnLinea {
 	private boolean isDraw() {
 		return tablero.stream().allMatch(col -> col.size()==altura);
 	}
-
-	public ArrayList<ArrayList<Character>> getBoard() {
-		return tablero;
-	}
-
-	public int getHeight() {
-		return altura;
-	}
-
 	public String getFinalMsg() {
 		return estado.getMsg();
+	}
+	public boolean checkVerticallyAndHorizontally(char player) {
+		ArrayList<Boolean> verify_list= new ArrayList<>();
+		verify_list.add(verifyVertical(player));
+		verify_list.add(verifyHorizontal(player));
+		return verify_list.stream().anyMatch(bool -> bool);
+	}
+	private boolean verifyVertical(char player) {	
+		return IntStream.range(0, base).anyMatch(col -> {
+	        long count = IntStream.range(0, getColSize(col))
+	            .mapToObj(fil -> getValueAt(col,fil))
+	            .takeWhile(cell -> cell == player)
+	            .count();
+	        
+	        if (count >= 4) {
+	            return true;
+	        }else {
+	        	return false;
+	        }
+	    });
+	}
+	
+	private boolean verifyHorizontal(char player) {
+	    return IntStream.range(0, altura).anyMatch(fil -> {
+	    	 long count = IntStream.range(0, base).mapToObj(col -> { 
+	    		if (getColSize(col)>fil) {
+	    			return getValueAt(col,fil);
+	    		} else {
+	    			return '-';
+	    		}
+	    	}).takeWhile(cell -> cell== player).count();
+	    	 if (count>=4) {
+	    		 return true;
+	    	 } else {
+	    		 
+	    		return false;
+	    	 }
+	    }); 
+	}
+	
+	public boolean checkDiagonally(char player) {
+		ArrayList<Boolean> chequeos = new ArrayList<>();
+		IntStream.range(1, altura + 1)
+	    .forEach(i -> {
+	        chequeos.add(verifyDiagonalRight(player, 0, altura - i));
+	        chequeos.add(verifyDiagonalLeft(player, base-1, altura - i));
+	    });
+		IntStream.range(1, base).forEach(i -> {
+		    chequeos.add(verifyDiagonalRight(player,i, 0));
+		    chequeos.add(verifyDiagonalLeft(player, base - 1 - i, 0));
+		});
+		return (chequeos.stream().anyMatch(b->b));
+	}
+	
+	private boolean verifyDiagonalLeft(char player, int startingX, int startingY) {
+		long count = IntStream.range(0, startingX+1).mapToObj(i -> {
+			int filaActual= i+startingY;
+			int colActual= startingX-i;
+    		if (getColSize(colActual)>filaActual) {
+    			return getValueAt(colActual,filaActual);
+    		} else {
+    			return '-';
+    		}
+		}).takeWhile(cell -> cell==player).count();	
+		if (count>=4) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private boolean verifyDiagonalRight(char player, int startingX, int startingY) {
+		long count = IntStream.range(startingX, base).mapToObj(col -> {
+			int filaActual= col-startingX+startingY;
+    		if (getColSize(col)>filaActual) {
+    			return getValueAt(col,filaActual);
+    		} else {
+    			return '-';
+    		}
+		}).takeWhile(cell -> cell==player).count();
+		
+		if (count>=4) {
+			return true;
+		} else {
+			
+			return false;
+		}
+	}
+	private char getValueAt(int x, int y) {
+		return tablero.get(x).get(y);
+	}
+	private int getColSize(int x){
+		return tablero.get(x).size();
 	}
 
 }
